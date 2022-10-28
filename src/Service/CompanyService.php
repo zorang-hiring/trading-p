@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Company;
-use App\Gateway\CompanyListGateway\CompanyListAdapterInterface;
+use App\Gateway\CompanyList\CompanyListAdapterInterface;
 
 class CompanyService implements CompanyFinderBySymbolServiceInterface
 {

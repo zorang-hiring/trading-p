@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Dto;
+namespace App\Gateway\DataRetrievalNotifier;
 
-class RetrieveCompanyQuotesNotificationDto
+class QuotesRetrievalNotificationDto
 {
     public string $recipient;
     public string $forCompanyName;

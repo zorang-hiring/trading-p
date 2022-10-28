@@ -2,23 +2,23 @@
 
 namespace App\Tests\Service;
 
-use App\Dto\RetrieveCompanyQuotesNotificationDto;
-use App\Service\QuotesRetrievalNotifierInterface;
+use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotificationDto;
+use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface;
 
 class QuotesRetrievalNotifierSpy implements QuotesRetrievalNotifierInterface
 {
     /**
-     * @var RetrieveCompanyQuotesNotificationDto[]
+     * @var QuotesRetrievalNotificationDto[]
      */
     protected array $notifications = [];
 
-    public function notify(RetrieveCompanyQuotesNotificationDto $notification): void
+    public function notify(QuotesRetrievalNotificationDto $notification): void
     {
         $this->notifications[] = $notification;
     }
 
     /**
-     * @return RetrieveCompanyQuotesNotificationDto[]
+     * @return QuotesRetrievalNotificationDto[]
      */
     public function getNotifications(): array
     {

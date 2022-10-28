@@ -2,7 +2,7 @@
 
 namespace App\Tests\Api;
 
-use App\Dto\RetrieveCompanyQuotesNotificationDto;
+use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotificationDto;
 
 class MainFormNotificationsTest extends AbstractMainFormTestCase
 {
@@ -47,7 +47,7 @@ class MainFormNotificationsTest extends AbstractMainFormTestCase
         $response = $client->getResponse();
         $this->assertResponseHasStatus(200, $response);
 
-        $expectedEmailNotification = new RetrieveCompanyQuotesNotificationDto();
+        $expectedEmailNotification = new QuotesRetrievalNotificationDto();
         $expectedEmailNotification->recipient = 'some@email.com';
         $expectedEmailNotification->forCompanyName = 'American Airlines Group, Inc.';
         $expectedEmailNotification->startDate = '2001-01-11';
@@ -60,7 +60,7 @@ class MainFormNotificationsTest extends AbstractMainFormTestCase
         self::assertEmpty($this->getQuoteRetrievalNotifierSpy()->getNotifications());
     }
 
-    private function assertEmailHasBeenSent(RetrieveCompanyQuotesNotificationDto $expectedNotification)
+    private function assertEmailHasBeenSent(QuotesRetrievalNotificationDto $expectedNotification)
     {
         self::assertCount(1, $notifications = $this->getQuoteRetrievalNotifierSpy()->getNotifications());
         self::assertEquals(

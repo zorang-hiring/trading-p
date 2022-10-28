@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Gateway\QuotesGateway;
+namespace App\Gateway\Quotes;
 
 use App\Entity\QuotesList;
 

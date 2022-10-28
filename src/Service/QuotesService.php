@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Company;
-use App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface;
+use App\Gateway\Quotes\CompanyHistoryQuotesAdapterInterface;
 use DateTime;
 use DateTimeInterface;
 

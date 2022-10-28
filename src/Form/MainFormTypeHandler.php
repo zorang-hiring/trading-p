@@ -2,10 +2,10 @@
 
 namespace App\Form;
 
-use App\Dto\RetrieveCompanyQuotesNotificationDto;
 use App\Entity\Company;
+use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotificationDto;
+use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface;
 use App\Service\CompanyFinderBySymbolServiceInterface;
-use App\Service\QuotesRetrievalNotifierInterface;
 use App\Service\QuotesRetrievalServiceInterface;
 
 class MainFormTypeHandler
@@ -33,7 +33,7 @@ class MainFormTypeHandler
 
     private function sendNotification(MainFormTypeDto $formData, Company $company): void
     {
-        $notification = new RetrieveCompanyQuotesNotificationDto();
+        $notification = new QuotesRetrievalNotificationDto();
         $notification->forCompanyName = $company->name;
         $notification->recipient = $formData->email;
         $notification->startDate = $formData->startDate->format('Y-m-d');

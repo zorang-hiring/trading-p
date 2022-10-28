@@ -23,14 +23,14 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Gateway\CompanyListGateway\CompanyListAdapterInterface:
-        class: App\Gateway\CompanyListGateway\DataHubNasdaqCompanyListAdapter
+    App\Gateway\CompanyList\CompanyListAdapterInterface:
+        class: App\Gateway\CompanyList\DataHubNasdaqCompanyListAdapter
         public: true
 
-    App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface:
-        class: App\Gateway\QuotesGateway\RapidApiCompanyHistoryQuotesAdapter
+    App\Gateway\Quotes\CompanyHistoryQuotesAdapterInterface:
+        class: App\Gateway\Quotes\RapidApiCompanyHistoryQuotesAdapter
         public: true
 
-    App\Service\QuotesRetrievalNotifierInterface:
-        class: App\Service\QuotesRetrievalMailNotifier
+    App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface:
+        class: App\Gateway\DataRetrievalNotifier\QuotesRetrievalMailNotifier
         public: true

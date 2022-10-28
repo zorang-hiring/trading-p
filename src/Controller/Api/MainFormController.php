@@ -4,8 +4,8 @@ namespace App\Controller\Api;
 
 use App\Form\MainFormType;
 use App\Form\MainFormTypeHandler;
+use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface;
 use App\Service\CompanyFinderBySymbolServiceInterface;
-use App\Service\QuotesRetrievalNotifierInterface;
 use App\Service\QuotesRetrievalServiceInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

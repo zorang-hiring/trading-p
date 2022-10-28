@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Gateway\CompanyListGateway;
+namespace App\Gateway\CompanyList;
 
 use App\Entity\CompaniesList;
 
