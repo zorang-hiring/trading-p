@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\CompanyService;
+namespace App\Service\CompanyListAdapter;
 
 class CompaniesListDto
 {

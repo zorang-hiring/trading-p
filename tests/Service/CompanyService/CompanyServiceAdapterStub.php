@@ -3,9 +3,9 @@
 namespace App\Tests\Service\CompanyService;
 
 
-use App\Service\CompanyService\CompaniesListDto;
-use App\Service\CompanyService\CompanyDto;
-use App\Service\CompanyService\CompanyListAdapterInterface;
+use App\Service\CompanyListAdapter\CompaniesListDto;
+use App\Service\CompanyListAdapter\CompanyDto;
+use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
 
 class CompanyServiceAdapterStub implements CompanyListAdapterInterface
 {

@@ -2,9 +2,9 @@
 
 namespace App\Service;
 
-use App\Service\CompanyService\CompanyListAdapterInterface;
+use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
 
-class CompanyService
+class CompanyService implements CompanySymbolValidationServiceInterface, CompanyHistoryQuotesFetcherServiceInterface
 {
     public function __construct(
         protected CompanyListAdapterInterface $companyListAdapter
@@ -15,5 +15,10 @@ class CompanyService
         return $this->companyListAdapter
             ->getCompanies()
             ->hasCompanyWithSymbol($companySymbol);
+    }
+
+    public function getQuotes(string $companySymbol, string $startDate, string $endDate)
+    {
+        // TODO: Implement getQuotes() method.
     }
 }

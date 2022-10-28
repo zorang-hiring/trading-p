@@ -12,6 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainFormController extends AbstractController
 {
+    public function __construct(
+
+    )
+    {}
+
     #[Route('/api/main-form', name: 'api_main_form', methods: ['POST'])]
     public function submit(Request $request): Response
     {
@@ -31,7 +36,7 @@ class MainFormController extends AbstractController
         ]);
 
 //        return new JsonResponse([
-//            'status' => 'NOK',
+//            'status' => 'OK',
 //            'message' => 'Validation error',
 //            'errors' => [
 //                'companySymbol' => ['Field is required.'],

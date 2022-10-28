@@ -2,7 +2,7 @@
 
 namespace App\Validator;
 
-use App\Service\CompanyService;
+use App\Service\CompanySymbolValidationServiceInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 class ContainsValidCompanySymbolValidator extends ConstraintValidator
 {
     public function __construct(
-        protected CompanyService $companyService
+        protected CompanySymbolValidationServiceInterface $companyService
     )
     {}
 

@@ -23,6 +23,6 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Service\CompanyService\CompanyListAdapterInterface:
-        class: App\Service\CompanyService\DataHubNasdaqCompanyListAdapter
+    App\Service\CompanyListAdapter\CompanyListAdapterInterface:
+        class: App\Service\CompanyListAdapter\DataHubNasdaqCompanyListAdapter
         public: true

@@ -2,7 +2,7 @@
 
 namespace App\Tests\Api;
 
-use App\Service\CompanyService\CompanyListAdapterInterface;
+use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
 use Carbon\Carbon;
 use App\Tests\Service\CompanyService\CompanyServiceAdapterStub;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
