@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-interface CompanyHistoryQuotesFetcherServiceInterface
+interface CompanyHistoryQuotesServiceInterface
 {
     public function getQuotes(string $companySymbol, string $startDate, string $endDate);
 }

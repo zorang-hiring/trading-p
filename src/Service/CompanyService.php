@@ -2,12 +2,14 @@
 
 namespace App\Service;
 
+use App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface;
 use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
 
-class CompanyService implements CompanySymbolValidationServiceInterface, CompanyHistoryQuotesFetcherServiceInterface
+class CompanyService implements CompanySymbolValidationServiceInterface, CompanyHistoryQuotesServiceInterface
 {
     public function __construct(
-        protected CompanyListAdapterInterface $companyListAdapter
+        protected CompanyListAdapterInterface $companyListAdapter,
+        protected CompanyHistoryQuotesAdapterInterface $companyHistoryQuotesAdapter
     ){}
 
     public function isValidCompanySymbol($companySymbol): bool
@@ -19,6 +21,6 @@ class CompanyService implements CompanySymbolValidationServiceInterface, Company
 
     public function getQuotes(string $companySymbol, string $startDate, string $endDate)
     {
-        // TODO: Implement getQuotes() method.
+        $data = $this->companyHistoryQuotesAdapter->getQuotes($companySymbol);
     }
 }

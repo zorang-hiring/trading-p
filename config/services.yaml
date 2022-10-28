@@ -26,3 +26,7 @@ services:
     App\Service\CompanyListAdapter\CompanyListAdapterInterface:
         class: App\Service\CompanyListAdapter\DataHubNasdaqCompanyListAdapter
         public: true
+
+    App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface:
+        class: App\Service\CompanyHistoryQuotesAdapter\RapidApiCompanyHistoryQuotesAdapter
+        public: true

@@ -2,13 +2,9 @@
 
 namespace App\Tests\Api;
 
-use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
 use Carbon\Carbon;
-use App\Tests\Service\CompanyService\CompanyServiceAdapterStub;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
 
-class SubmitMainFormTest extends WebTestCase
+class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
 {
     public function testReturnErrorWhenFieldsNotPosted(): void
     {
@@ -157,28 +153,6 @@ class SubmitMainFormTest extends WebTestCase
                 ]
             ],
             $response
-        );
-    }
-
-    protected function assertResponseHasStatus(int $expectedStatus, Response $actualResponse): void
-    {
-        $this->assertSame($expectedStatus, $actualResponse->getStatusCode());
-    }
-
-    protected function assertResponseJsonContent(array $expectedJson, Response $response): void
-    {
-        $this->assertJsonStringEqualsJsonString(
-            json_encode($expectedJson),
-            $actual = $response->getContent(),
-            sprintf('Expected JSON "%s" not equal to "%s"', json_encode($expectedJson), $actual)
-        );
-    }
-
-    private function mockCompanyListAdapter(): void
-    {
-        $this->getContainer()->set(
-            CompanyListAdapterInterface::class,
-            new CompanyServiceAdapterStub()
         );
     }
 }
