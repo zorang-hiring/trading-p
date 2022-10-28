@@ -20,9 +20,9 @@ class RapidApiCompanyHistoryQuotesAdapter implements CompanyHistoryQuotesAdapter
         ];
     }
 
-    public function getCredentials()
+    public function getCredentials(): array
     {
-        // todo test DI configuration
+        return $this->credentials;
     }
 
     public function getQuotes(string $companySymbol): QuotesList

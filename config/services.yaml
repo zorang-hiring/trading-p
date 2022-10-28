@@ -30,8 +30,8 @@ services:
     App\Gateway\Quotes\CompanyHistoryQuotesAdapterInterface:
         class: App\Gateway\Quotes\RapidApiCompanyHistoryQuotesAdapter
         arguments:
-            $apiKey: 'todo1'
-            $apiHost: 'todo2'
+            $apiKey: '%env(resolve:RAPID_API_KEY)%'
+            $apiHost: '%env(resolve:RAPID_API_HOST)%'
         public: true
 
     App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface:
