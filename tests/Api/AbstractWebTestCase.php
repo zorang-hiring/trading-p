@@ -2,6 +2,7 @@
 
 namespace App\Tests\Api;
 
+use Carbon\Carbon;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,5 +21,10 @@ abstract class AbstractWebTestCase extends WebTestCase
     protected function assertResponseHasStatus(int $expectedStatus, Response $actualResponse): void
     {
         $this->assertSame($expectedStatus, $actualResponse->getStatusCode());
+    }
+
+    protected function setCurrentDate(string $testNow): void
+    {
+        Carbon::setTestNow($testNow);
     }
 }

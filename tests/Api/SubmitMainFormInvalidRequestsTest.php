@@ -67,7 +67,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
     public function testReturnErrorWhenEndDateIsLessThenStartDate(): void
     {
         // GIVEN
-        Carbon::setTestNow(Carbon::createFromDate(2001, 2, 4));
+        $this->setCurrentDate('2001-02-04');
         $client = static::createClient();
         $this->mockCompanyAdapters();
 
@@ -98,7 +98,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
     public function testReturnErrorWhenEndDateAndStartDateAreLessThenCurrentDate(): void
     {
         // GIVEN
-        Carbon::setTestNow(Carbon::createFromDate(2001, 2, 2));
+        $this->setCurrentDate('2001-02-02');
         $client = static::createClient();
         $this->mockCompanyAdapters();
 
@@ -129,7 +129,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
     public function testReturnErrorWhenCompanySymbolDoesNotExist(): void
     {
         // GIVEN
-        Carbon::setTestNow(Carbon::createFromDate(2001, 2, 5));
+        $this->setCurrentDate('2001-02-05');
         $client = static::createClient();
         $this->mockCompanyAdapters();
 
