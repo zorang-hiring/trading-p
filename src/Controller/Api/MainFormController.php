@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Dto\RetrieveCompanyQuotesNotificationDto;
 use App\Entity\Company;
 use App\Form\MainFormType;
+use App\Form\MainFormTypeHandler;
 use App\Service\CompanyFinderBySymbolServiceInterface;
 use App\Service\QuotesRetrievalNotifierInterface;
 use App\Service\QuotesRetrievalServiceInterface;
@@ -18,7 +19,8 @@ class MainFormController extends AbstractController
     public function __construct(
         protected CompanyFinderBySymbolServiceInterface $companyService,
         protected QuotesRetrievalServiceInterface $quotesService,
-        protected QuotesRetrievalNotifierInterface $notifier
+        protected QuotesRetrievalNotifierInterface $notifier,
+        protected MainFormTypeHandler $formHandler
     ){}
 
     #[Route('/api/main-form', name: 'api_main_form', methods: ['POST'])]
@@ -26,38 +28,15 @@ class MainFormController extends AbstractController
     {
         $form = $this->createForm(MainFormType::class);
         $form->submit($request->request->all());
-
         if (!$form->isValid()) {
             return $this->buildResponseJsonInvalidForm($form);
         }
 
-        $formData = $form->getData();
-
-        $company = $this->companyService->getCompanyBySymbol($formData['companySymbol']);
-
-        $result = new JsonResponse([
+        return new JsonResponse([
             'status' => 'OK',
             'message' => '',
             'errors' => [],
-            'data' => $this->quotesService->retrieveQuotes(
-                $company,
-                $formData['startDate'],
-                $formData['endDate'],
-            )
+            'data' => $this->formHandler->handle($form)
         ]);
-
-        $this->sendNotification($formData, $company);
-
-        return $result;
-    }
-
-    private function sendNotification(mixed $formData, Company $company): void
-    {
-        $notification = new RetrieveCompanyQuotesNotificationDto();
-        $notification->forCompanyName = $company->name;
-        $notification->recipient = $formData['email'];
-        $notification->startDate = $formData['startDate']->format('Y-m-d');
-        $notification->endDate = $formData['endDate']->format('Y-m-d');
-        $this->notifier->notify($notification);
     }
 }
