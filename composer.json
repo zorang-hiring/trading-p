@@ -1,0 +1,17 @@
+{
+    "name": "zorang/interview-trading-p",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">8.0"
+    }
+}
