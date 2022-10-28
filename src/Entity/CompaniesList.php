@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-class CompaniesListDto
+class CompaniesList
 {
     /**
-     * @var CompanyDto[]
+     * @var Company[]
      */
     protected array $companies = [];
 
-    public function addCompany(CompanyDto $company): void
+    public function addCompany(Company $company): void
     {
         $this->companies[] = $company;
     }

@@ -2,12 +2,12 @@
 
 namespace App\Gateway\CompanyListGateway;
 
-use App\Entity\CompaniesListDto;
+use App\Entity\CompaniesList;
 
 class DataHubNasdaqCompanyListAdapter implements CompanyListAdapterInterface
 {
-    public function getCompanies(): CompaniesListDto
+    public function getCompanies(): CompaniesList
     {
-        return new CompaniesListDto();
+        return new CompaniesList();
     }
 }

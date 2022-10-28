@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class QuoteDto
+class Quote
 {
     public int $date;
     public float $open;

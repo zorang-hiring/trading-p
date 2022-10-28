@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class CompanyDto
+class Company
 {
     public string $symbol;
 

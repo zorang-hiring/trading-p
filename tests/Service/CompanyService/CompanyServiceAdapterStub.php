@@ -3,8 +3,8 @@
 namespace App\Tests\Service\CompanyService;
 
 
-use App\Entity\CompaniesListDto;
-use App\Entity\CompanyDto;
+use App\Entity\CompaniesList;
+use App\Entity\Company;
 use App\Gateway\CompanyListGateway\CompanyListAdapterInterface;
 
 class CompanyServiceAdapterStub implements CompanyListAdapterInterface
@@ -30,12 +30,12 @@ class CompanyServiceAdapterStub implements CompanyListAdapterInterface
         ]
     ];
 
-    public function getCompanies(): CompaniesListDto
+    public function getCompanies(): CompaniesList
     {
-        $result = new CompaniesListDto();
+        $result = new CompaniesList();
         foreach ($this->dataStub as $item) {
             $result->addCompany(
-                new CompanyDto($item['Symbol'])
+                new Company($item['Symbol'])
             );
         }
         return $result;

@@ -2,20 +2,20 @@
 
 namespace App\Entity;
 
-class QuotesListDto
+class QuotesList
 {
     /**
-     * @var QuoteDto[]
+     * @var Quote[]
      */
     protected array $data = [];
 
-    public function addQuote(QuoteDto $quote): void
+    public function addQuote(Quote $quote): void
     {
         $this->data[] = $quote;
     }
 
     /**
-     * @return QuoteDto[]
+     * @return Quote[]
      */
     public function getQuotes(): array
     {

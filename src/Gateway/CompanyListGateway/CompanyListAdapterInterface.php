@@ -2,9 +2,9 @@
 
 namespace App\Gateway\CompanyListGateway;
 
-use App\Entity\CompaniesListDto;
+use App\Entity\CompaniesList;
 
 interface CompanyListAdapterInterface
 {
-    public function getCompanies(): CompaniesListDto;
+    public function getCompanies(): CompaniesList;
 }

@@ -2,8 +2,8 @@
 
 namespace App\Tests\Service\CompanyHistoryQuotesAdapter;
 
-use App\Entity\QuoteDto;
-use App\Entity\QuotesListDto;
+use App\Entity\Quote;
+use App\Entity\QuotesList;
 use App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface;
 
 class CompanyHistoryQuotesAdapterSpy implements CompanyHistoryQuotesAdapterInterface
@@ -37,13 +37,13 @@ class CompanyHistoryQuotesAdapterSpy implements CompanyHistoryQuotesAdapterInter
         $this->stubData['prices'] = $data;
     }
 
-    public function getQuotes(string $companySymbol): QuotesListDto
+    public function getQuotes(string $companySymbol): QuotesList
     {
         $this->requestedParamsSpy['companySymbol'] = $companySymbol;
 
-        $result = new QuotesListDto();
+        $result = new QuotesList();
         foreach ($this->stubData['prices'] as $data) {
-            $quote = new QuoteDto();
+            $quote = new Quote();
             $quote->date = $data['date'];
             $quote->open = $data['open'];
             $quote->high = $data['high'];
