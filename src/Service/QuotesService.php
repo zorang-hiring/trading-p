@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface;
+use App\Service\QuotesAdapter\CompanyHistoryQuotesAdapterInterface;
 use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
 use DateTimeInterface;
 use DateTime;

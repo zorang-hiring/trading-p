@@ -2,7 +2,7 @@
 
 namespace App\Tests\Api;
 
-use App\Service\QuoteRetrievalNotifier\RetrieveCompanyQuotesNotificationDto;
+use App\Dto\RetrieveCompanyQuotesNotificationDto;
 
 class MainFormNotificationsTest extends AbstractMainFormTestCase
 {

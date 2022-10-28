@@ -2,10 +2,10 @@
 
 namespace App\Tests\Service;
 
-use App\Service\QuoteRetrievalNotifier\RetrieveCompanyQuotesNotificationDto;
-use App\Service\QuoteRetrievalNotifierInterface;
+use App\Dto\RetrieveCompanyQuotesNotificationDto;
+use App\Service\QuotesRetrievalNotifierInterface;
 
-class QuoteRetrievalNotifierSpy implements QuoteRetrievalNotifierInterface
+class QuotesRetrievalNotifierSpy implements QuotesRetrievalNotifierInterface
 {
     /**
      * @var RetrieveCompanyQuotesNotificationDto[]

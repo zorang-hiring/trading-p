@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Service\QuoteRetrievalNotifier;
-
-use DateTimeInterface;
+namespace App\Dto;
 
 class RetrieveCompanyQuotesNotificationDto
 {

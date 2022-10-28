@@ -2,12 +2,12 @@
 
 namespace App\Tests\Api;
 
-use App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface;
+use App\Service\QuotesAdapter\CompanyHistoryQuotesAdapterInterface;
 use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
-use App\Service\QuoteRetrievalNotifierInterface;
+use App\Service\QuotesRetrievalNotifierInterface;
 use App\Tests\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterSpy;
 use App\Tests\Service\CompanyService\CompanyServiceAdapterStub;
-use App\Tests\Service\QuoteRetrievalNotifierSpy;
+use App\Tests\Service\QuotesRetrievalNotifierSpy;
 
 abstract class AbstractMainFormTestCase extends AbstractWebTestCase
 {
@@ -49,11 +49,11 @@ abstract class AbstractMainFormTestCase extends AbstractWebTestCase
         return $adapter;
     }
 
-    protected function getQuoteRetrievalNotifierSpy(): QuoteRetrievalNotifierSpy
+    protected function getQuoteRetrievalNotifierSpy(): QuotesRetrievalNotifierSpy
     {
-        /** @var QuoteRetrievalNotifierSpy $object */
+        /** @var QuotesRetrievalNotifierSpy $object */
         $object = $this->getContainer()->get(
-            QuoteRetrievalNotifierInterface::class,
+            QuotesRetrievalNotifierInterface::class,
         );
         return $object;
     }
@@ -61,8 +61,8 @@ abstract class AbstractMainFormTestCase extends AbstractWebTestCase
     private function mockQuoteRetrievalNotifier(): void
     {
         $this->getContainer()->set(
-            QuoteRetrievalNotifierInterface::class,
-            new QuoteRetrievalNotifierSpy()
+            QuotesRetrievalNotifierInterface::class,
+            new QuotesRetrievalNotifierSpy()
         );
     }
 }

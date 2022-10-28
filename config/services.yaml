@@ -27,10 +27,10 @@ services:
         class: App\Service\CompanyListAdapter\DataHubNasdaqCompanyListAdapter
         public: true
 
-    App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface:
-        class: App\Service\CompanyHistoryQuotesAdapter\RapidApiCompanyHistoryQuotesAdapter
+    App\Service\QuotesAdapter\CompanyHistoryQuotesAdapterInterface:
+        class: App\Service\QuotesAdapter\RapidApiCompanyHistoryQuotesAdapter
         public: true
 
-    App\Service\QuoteRetrievalNotifierInterface:
-        class: App\Service\QuoteRetrievalMailNotifier
+    App\Service\QuotesRetrievalNotifierInterface:
+        class: App\Service\QuotesRetrievalMailNotifier
         public: true

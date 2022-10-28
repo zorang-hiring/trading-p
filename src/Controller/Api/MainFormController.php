@@ -2,10 +2,10 @@
 
 namespace App\Controller\Api;
 
-use App\Service\QuotesRetrievalServiceInterface;
+use App\Dto\RetrieveCompanyQuotesNotificationDto;
 use App\Form\MainFormType;
-use App\Service\QuoteRetrievalNotifier\RetrieveCompanyQuotesNotificationDto;
-use App\Service\QuoteRetrievalNotifierInterface;
+use App\Service\QuotesRetrievalNotifierInterface;
+use App\Service\QuotesRetrievalServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,7 +17,7 @@ class MainFormController extends AbstractController
 {
     public function __construct(
         protected QuotesRetrievalServiceInterface $companyQuotesService,
-        protected QuoteRetrievalNotifierInterface $notifier
+        protected QuotesRetrievalNotifierInterface $notifier
     ){}
 
     #[Route('/api/main-form', name: 'api_main_form', methods: ['POST'])]

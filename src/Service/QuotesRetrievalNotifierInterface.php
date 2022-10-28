@@ -2,9 +2,9 @@
 
 namespace App\Service;
 
-use App\Service\QuoteRetrievalNotifier\RetrieveCompanyQuotesNotificationDto;
+use App\Dto\RetrieveCompanyQuotesNotificationDto;
 
-interface QuoteRetrievalNotifierInterface
+interface QuotesRetrievalNotifierInterface
 {
     public function notify(RetrieveCompanyQuotesNotificationDto $notification): void;
 }

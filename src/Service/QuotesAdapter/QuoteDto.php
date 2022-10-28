@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\CompanyHistoryQuotesAdapter;
+namespace App\Service\QuotesAdapter;
 
 class QuoteDto
 {

@@ -2,9 +2,9 @@
 
 namespace App\Tests\Service\CompanyHistoryQuotesAdapter;
 
-use App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface;
-use App\Service\CompanyHistoryQuotesAdapter\QuoteDto;
-use App\Service\CompanyHistoryQuotesAdapter\QuotesListDto;
+use App\Service\QuotesAdapter\CompanyHistoryQuotesAdapterInterface;
+use App\Service\QuotesAdapter\QuoteDto;
+use App\Service\QuotesAdapter\QuotesListDto;
 
 class CompanyHistoryQuotesAdapterSpy implements CompanyHistoryQuotesAdapterInterface
 {
