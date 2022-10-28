@@ -17,7 +17,7 @@ abstract class AbstractSubmitMainFormTestCase extends AbstractWebTestCase
         );
     }
 
-    private function mockCompanyHistoryQuotesAdapter(): void
+    private function mockCompanyQuotesAdapter(): void
     {
         $this->getContainer()->set(
             CompanyHistoryQuotesAdapterInterface::class,
@@ -28,6 +28,21 @@ abstract class AbstractSubmitMainFormTestCase extends AbstractWebTestCase
     protected function mockCompanyAdapters()
     {
         $this->mockCompanyListAdapter();
-        $this->mockCompanyHistoryQuotesAdapter();
+        $this->mockCompanyQuotesAdapter();
+        $this->resetCompanyQuotesAdapterSpy();
+    }
+
+    private function resetCompanyQuotesAdapterSpy(): void
+    {
+        $this->getCompanyQuotesAdapter()->reset();
+    }
+
+    protected function getCompanyQuotesAdapter(): CompanyHistoryQuotesAdapterSpy
+    {
+        /** @var CompanyHistoryQuotesAdapterSpy $adapter */
+        $adapter = $this->getContainer()->get(
+            CompanyHistoryQuotesAdapterInterface::class,
+        );
+        return $adapter;
     }
 }

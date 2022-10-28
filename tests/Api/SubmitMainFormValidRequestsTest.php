@@ -2,9 +2,6 @@
 
 namespace App\Tests\Api;
 
-use App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface;
-use App\Tests\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterSpy;
-
 class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
 {
     public function testReturnSuccessOnValidRequest(): void
@@ -14,7 +11,6 @@ class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
         $this->setCurrentDate('2001-02-05');
         $client = static::createClient();
         $this->mockCompanyAdapters();
-        $this->resetCompanyQuotesSpy();
         $this->setCompanyQuotesStubData([
             // before range
             [
@@ -52,23 +48,9 @@ class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
         );
     }
 
-    protected function getCompanyQuotesAdapter(): CompanyHistoryQuotesAdapterSpy
-    {
-        /** @var CompanyHistoryQuotesAdapterSpy $adapter */
-        $adapter = $this->getContainer()->get(
-            CompanyHistoryQuotesAdapterInterface::class,
-        );
-        return $adapter;
-    }
-
     protected function setCompanyQuotesStubData(array $data): void
     {
         $this->getCompanyQuotesAdapter()->setStubData($data);
-    }
-
-    protected function resetCompanyQuotesSpy(): void
-    {
-        $this->getCompanyQuotesAdapter()->reset();
     }
 
     protected function getCompanyQuotesAdapterRequestParams(): array
