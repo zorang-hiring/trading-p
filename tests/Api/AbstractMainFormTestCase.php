@@ -3,11 +3,11 @@
 namespace App\Tests\Api;
 
 use App\Gateway\CompanyList\CompanyListAdapterInterface;
-use App\Gateway\Quotes\CompanyHistoryQuotesAdapterInterface;
 use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface;
-use App\Tests\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterSpy;
-use App\Tests\Service\CompanyService\CompanyServiceAdapterStub;
-use App\Tests\Service\QuotesRetrievalNotifierSpy;
+use App\Gateway\Quotes\CompanyHistoryQuotesAdapterInterface;
+use App\Tests\Gateway\CompanyList\CompanyListAdapterStub;
+use App\Tests\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierSpy;
+use App\Tests\Gateway\Quotes\CompanyHistoryQuotesAdapterSpy;
 
 abstract class AbstractMainFormTestCase extends AbstractWebTestCase
 {
@@ -15,7 +15,7 @@ abstract class AbstractMainFormTestCase extends AbstractWebTestCase
     {
         $this->getContainer()->set(
             CompanyListAdapterInterface::class,
-            new CompanyServiceAdapterStub()
+            new CompanyListAdapterStub()
         );
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Service\CompanyHistoryQuotesAdapter;
+namespace App\Tests\Gateway\Quotes;
 
 use App\Entity\Quote;
 use App\Entity\QuotesList;

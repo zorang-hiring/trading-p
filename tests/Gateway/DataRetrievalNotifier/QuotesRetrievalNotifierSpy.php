@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Service;
+namespace App\Tests\Gateway\DataRetrievalNotifier;
 
 use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotificationDto;
 use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface;

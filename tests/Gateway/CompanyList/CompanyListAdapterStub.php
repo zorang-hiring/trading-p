@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Tests\Service\CompanyService;
+namespace App\Tests\Gateway\CompanyList;
 
 
 use App\Entity\CompaniesList;
 use App\Entity\Company;
 use App\Gateway\CompanyList\CompanyListAdapterInterface;
 
-class CompanyServiceAdapterStub implements CompanyListAdapterInterface
+class CompanyListAdapterStub implements CompanyListAdapterInterface
 {
     protected array $dataStub = [
         [

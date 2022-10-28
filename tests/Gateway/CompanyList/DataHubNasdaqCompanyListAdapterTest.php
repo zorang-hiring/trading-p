@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Service\CompanyService;
+namespace App\Tests\Gateway\CompanyList;
 
 use PHPUnit\Framework\TestCase;
 
