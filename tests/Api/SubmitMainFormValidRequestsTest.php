@@ -14,7 +14,7 @@ class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
         // WHEN
         $client->request('POST', '/api/main-form', [
             'companySymbol' => 'AAL',
-            'startDate' => '2001-02-03',
+            'startDate' => '2001-01-11',
             'endDate' => '2001-02-03',
             'email' => 'some@email.com',
         ]);
