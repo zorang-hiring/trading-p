@@ -24,6 +24,7 @@ class DataHubNasdaqCompanyListAdapterTest extends AbstractGatewayTestCase
 
     /**
      * @testWith [201]
+     *           [300]
      *           [400]
      *           [500]
      */
