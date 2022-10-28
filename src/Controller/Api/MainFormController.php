@@ -25,26 +25,13 @@ class MainFormController extends AbstractController
         if (!$form->isValid()) {
             return $this->buildResponseJsonInvalidForm($form);
         }
-        echo 222;
-        // $form->getData() holds the submitted values
-        // but, the original `$task` variable has also been updated
-        $data = $form->getData();
+        // $data = $form->getData();
 
         return new JsonResponse([
-
-
+            'status' => 'OK',
+            'message' => '',
+            'errors' => []
         ]);
-
-//        return new JsonResponse([
-//            'status' => 'OK',
-//            'message' => 'Validation error',
-//            'errors' => [
-//                'companySymbol' => ['Field is required.'],
-//                'startDate' => ['Field is required.'],
-//                'endDate' => ['Field is required.'],
-//                'email' => ['Field is required.']
-//            ]
-//        ]);
     }
 
     public function buildResponseJsonInvalidForm(FormInterface $form): JsonResponse
