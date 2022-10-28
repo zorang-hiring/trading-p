@@ -17,10 +17,28 @@ git clone https://github.com/zorang-hiring/trading-p
 ```
 docker-compose -f docker/docker-compose.yml --env-file docker/sample.env up --build
 ```
-to debug:
+to debug (todo remove):
 ```
 DOCKER_BUILDKIT=0 docker-compose -f docker/docker-compose.yml --env-file docker/sample.env up --build
 ```
+Note: if you get timeout message because of some reason (e.g. slow local computer or internet connection) 
+just run command twice or more.
+
+## Usage:
+
+Open page: `http:todo`
+And enjoy.
+
+## Tests!
+
+Coverage is total - 100%! (todo)
+
+Run Backend tests with coverage:
+```
+docker exec --workdir /var/www/current docker-php-fpm-1 php bin/phpunit --coverage-text
+```
+Note: 'docker-php-fpm-1' should be your php docker container name. If you have different container name on your
+local computer then just update the command.
 
 ## TODO
 
