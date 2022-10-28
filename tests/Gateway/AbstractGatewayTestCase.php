@@ -20,6 +20,7 @@ abstract class AbstractGatewayTestCase extends TestCase
      * @param string $expectedReqMethod
      * @param string $expectedReqUri
      * @param string $expectedReqBody
+     * @param array $expectedReqHeaders
      * @return void
      * @see https://docs.guzzlephp.org/en/stable/testing.html?highlight=test#mock-handler
      */
@@ -27,6 +28,7 @@ abstract class AbstractGatewayTestCase extends TestCase
         string $expectedReqMethod,
         string $expectedReqUri,
         string $expectedReqBody,
+        array $expectedReqHeaders,
         array $actualRequestsSpy
     ): void
     {
@@ -36,6 +38,9 @@ abstract class AbstractGatewayTestCase extends TestCase
         $this::assertSame($expectedReqMethod, $actualRequest->getMethod());
         $this::assertSame($expectedReqUri, (string)$actualRequest->getUri());
         $this::assertSame($expectedReqBody, (string)$actualRequest->getBody());
+        foreach ($expectedReqHeaders as $name => $value) {
+            $this::assertSame(is_array($value) ? $value : [$value], $actualRequest->getHeader($name));
+        }
     }
 
     /**

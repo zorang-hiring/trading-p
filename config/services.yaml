@@ -29,6 +29,9 @@ services:
 
     App\Gateway\Quotes\CompanyHistoryQuotesAdapterInterface:
         class: App\Gateway\Quotes\RapidApiCompanyHistoryQuotesAdapter
+        arguments:
+            $apiKey: 'todo1'
+            $apiHost: 'todo2'
         public: true
 
     App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface:

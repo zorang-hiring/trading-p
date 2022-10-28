@@ -13,6 +13,8 @@ class DataHubNasdaqCompanyListAdapterTest extends AbstractGatewayTestCase
 {
     protected DataHubNasdaqCompanyListAdapter|MockObject $sut;
 
+    protected const EXPECTED_REQUEST_HEADERS = [];
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -47,6 +49,16 @@ class DataHubNasdaqCompanyListAdapterTest extends AbstractGatewayTestCase
 
         // WHEN
         $this->sut->getCompanies();
+
+        // THEN
+        $this->assertClientOneRequest(
+            'GET',
+            'https://pkgstore.datahub.io/core/nasdaq-listings/nasdaq-listed_json/data/' .
+            'a5bc7580d6176d60ac0b2142ca8d7df6/nasdaq-listed_json.json',
+            '',
+            self::EXPECTED_REQUEST_HEADERS,
+            $spy
+        );
     }
 
     public function testGetCompaniesSuccess()
@@ -79,6 +91,7 @@ class DataHubNasdaqCompanyListAdapterTest extends AbstractGatewayTestCase
             'https://pkgstore.datahub.io/core/nasdaq-listings/nasdaq-listed_json/data/' .
             'a5bc7580d6176d60ac0b2142ca8d7df6/nasdaq-listed_json.json',
             '',
+            self::EXPECTED_REQUEST_HEADERS,
             $spy
         );
     }

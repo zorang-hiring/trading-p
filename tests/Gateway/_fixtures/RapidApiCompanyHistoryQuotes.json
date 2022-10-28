@@ -1,0 +1,42 @@
+{
+  "prices": [
+    {
+      "date": 11,
+      "open": 21.2,
+      "high": 31.3,
+      "low": 41.4,
+      "close": 51.5,
+      "volume": 61,
+      "adjclose": 71.7
+    },
+    {
+      "date": 12,
+      "open": 22.2,
+      "high": 32.3,
+      "low": 42.4,
+      "close": 52.5,
+      "volume": 62,
+      "adjclose": 72.7
+    }
+  ],
+  "isPending": false,
+  "firstTradeDate": 942935400,
+  "id": "",
+  "timeZone": {
+    "gmtOffset": -14400
+  },
+  "eventsData": [
+    {
+      "amount": 0.21,
+      "date": 1664803800,
+      "type": "DIVIDEND",
+      "data": 0.21
+    },
+    {
+      "amount": 0.21,
+      "date": 1656682200,
+      "type": "DIVIDEND",
+      "data": 0.21
+    }
+  ]
+}
