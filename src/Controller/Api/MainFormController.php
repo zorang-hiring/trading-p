@@ -3,7 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Service\CompanyHistoryQuotesServiceInterface;
-use Form\MainFormType;
+use App\Form\MainFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
