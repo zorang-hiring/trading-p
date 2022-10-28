@@ -7,19 +7,12 @@ use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
 use DateTimeInterface;
 use DateTime;
 
-class QuotesService implements CompanySymbolValidationServiceInterface, QuotesRetrievalServiceInterface
+class QuotesService implements QuotesRetrievalServiceInterface
 {
     public function __construct(
         protected CompanyListAdapterInterface $companyListAdapter,
         protected CompanyHistoryQuotesAdapterInterface $companyHistoryQuotesAdapter
     ){}
-
-    public function isValidCompanySymbol($companySymbol): bool
-    {
-        return $this->companyListAdapter
-            ->getCompanies()
-            ->hasCompanyWithSymbol($companySymbol);
-    }
 
     public function retrieveQuotes(string $companySymbol, DateTimeInterface $startDate, DateTimeInterface $endDate): array
     {

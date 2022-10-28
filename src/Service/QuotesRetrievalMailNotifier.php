@@ -8,6 +8,6 @@ class QuotesRetrievalMailNotifier implements QuotesRetrievalNotifierInterface
 {
     public function notify(RetrieveCompanyQuotesNotificationDto $notification): void
     {
-
+        // todo
     }
 }
