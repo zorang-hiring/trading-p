@@ -52,6 +52,6 @@ class MainFormController extends AbstractController
             'status' => 'NOK',
             'message' => 'Invalid Request',
             'errors' => $errors
-        ]);
+        ], 400);
     }
 }

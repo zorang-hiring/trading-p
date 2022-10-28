@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 
@@ -29,6 +31,10 @@ class MainFormType extends AbstractType
                 'invalid_message' => 'Accepted date format is YYYY-MM-DD.',
                 'constraints' => [
                     new NotBlank(),
+                    new LessThanOrEqual([
+                        'propertyPath' => 'parent.all[endDate].data',
+                        'message' => 'Has to be less or equal then endDate.'
+                    ])
                 ]
             ])
             ->add('endDate', DateType::class, [
@@ -38,6 +44,10 @@ class MainFormType extends AbstractType
                 'invalid_message' => 'Accepted date format is YYYY-MM-DD.',
                 'constraints' => [
                     new NotBlank(),
+                    new GreaterThanOrEqual([
+                        'propertyPath' => 'parent.all[startDate].data',
+                        'message' => 'Has to be greater or equal then startDate.'
+                    ])
                 ]
             ])
             ->add('email', EmailType::class, [

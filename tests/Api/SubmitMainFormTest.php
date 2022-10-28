@@ -15,7 +15,7 @@ class SubmitMainFormTest extends WebTestCase
 
         // THEN
         $response = $client->getResponse();
-        $this->assertResponseHasStatus(200, $response);
+        $this->assertResponseHasStatus(400, $response);
         $this->assertResponseJsonContent(
             [
                 'status' => 'NOK',
@@ -44,7 +44,7 @@ class SubmitMainFormTest extends WebTestCase
 
         // THEN
         $response = $client->getResponse();
-        $this->assertResponseHasStatus(200, $response);
+        $this->assertResponseHasStatus(400, $response);
         $this->assertResponseJsonContent(
             [
                 'status' => 'NOK',
@@ -53,6 +53,33 @@ class SubmitMainFormTest extends WebTestCase
                     'startDate' => ['Accepted date format is YYYY-MM-DD.'],
                     'endDate' => ['Accepted date format is YYYY-MM-DD.'],
                     'email' => ['This value is not a valid email address.']
+                ]
+            ],
+            $response
+        );
+    }
+
+    public function testReturnErrorWhenEndDateIsLessThenStartDate(): void
+    {
+        // WHEN
+        $client = static::createClient();
+        $client->request('POST', '/api/main-form', [
+            'companySymbol' => 'a',
+            'startDate' => '2001-02-04',
+            'endDate' => '2001-02-03',
+            'email' => 'some@email.com',
+        ]);
+
+        // THEN
+        $response = $client->getResponse();
+        $this->assertResponseHasStatus(400, $response);
+        $this->assertResponseJsonContent(
+            [
+                'status' => 'NOK',
+                'message' => 'Invalid Request',
+                'errors' => [
+                    'startDate' => ['Has to be less or equal then endDate.'],
+                    'endDate' => ['Has to be greater or equal then startDate.'],
                 ]
             ],
             $response
