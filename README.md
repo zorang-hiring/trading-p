@@ -22,5 +22,7 @@ php composer.phar install --ignore-platform-reqs
 ```
 docker-compose -f docker/docker-compose.yml --env-file docker/sample.env up --build
 ```
-
-// /var/www/current
+to debug:
+```
+DOCKER_BUILDKIT=0 docker-compose -f docker/docker-compose.yml --env-file docker/sample.env up --build
+```

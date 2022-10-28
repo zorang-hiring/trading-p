@@ -3,6 +3,8 @@ FROM php:${PHP_FPM_VERSION}-fpm
 
 RUN docker-php-ext-install pdo_mysql
 
-CMD ["php-fpm"]
+ADD start.sh /
+RUN chmod +x /start.sh
+ENTRYPOINT ["/start.sh"]
 
 EXPOSE 9000
