@@ -14,11 +14,7 @@ class MainFormController extends AbstractController
     #[Route('/api/main-form', name: 'api_main_form', methods: ['POST'])]
     public function submit(Request $request): Response
     {
-        // var_dump($request->request);
-
-        $form = $this->createForm(MainFormType::class, [], [
-            'method' => 'POST' // todo needed ?
-        ]);
+        $form = $this->createForm(MainFormType::class);
 
         $form->submit($request->request->all());
         if (!$form->isValid()) {
