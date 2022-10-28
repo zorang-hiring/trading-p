@@ -4,10 +4,12 @@ namespace App\Tests\Api;
 
 use App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface;
 use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
+use App\Service\QuoteRetrievalNotifierInterface;
 use App\Tests\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterSpy;
 use App\Tests\Service\CompanyService\CompanyServiceAdapterStub;
+use App\Tests\Service\QuoteRetrievalNotifierSpy;
 
-abstract class AbstractSubmitMainFormTestCase extends AbstractWebTestCase
+abstract class AbstractMainFormTestCase extends AbstractWebTestCase
 {
     private function mockCompanyListAdapter(): void
     {
@@ -25,11 +27,12 @@ abstract class AbstractSubmitMainFormTestCase extends AbstractWebTestCase
         );
     }
 
-    protected function mockCompanyAdapters()
+    protected function mockAdapters()
     {
         $this->mockCompanyListAdapter();
         $this->mockCompanyQuotesAdapter();
         $this->resetCompanyQuotesAdapterSpy();
+        $this->mockQuoteRetrievalNotifier();
     }
 
     private function resetCompanyQuotesAdapterSpy(): void
@@ -44,5 +47,27 @@ abstract class AbstractSubmitMainFormTestCase extends AbstractWebTestCase
             CompanyHistoryQuotesAdapterInterface::class,
         );
         return $adapter;
+    }
+
+    protected function getQuoteRetrievalNotifierSpy(): QuoteRetrievalNotifierSpy
+    {
+        /** @var QuoteRetrievalNotifierSpy $object */
+        $object = $this->getContainer()->get(
+            QuoteRetrievalNotifierInterface::class,
+        );
+        return $object;
+    }
+
+    private function mockQuoteRetrievalNotifier(): void
+    {
+        $this->getContainer()->set(
+            QuoteRetrievalNotifierInterface::class,
+            new QuoteRetrievalNotifierSpy()
+        );
+    }
+
+    protected function setCompanyQuotesStubData(array $data): void
+    {
+        $this->getCompanyQuotesAdapter()->setStubData($data);
     }
 }

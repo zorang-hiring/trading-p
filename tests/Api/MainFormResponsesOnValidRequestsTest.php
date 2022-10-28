@@ -2,7 +2,7 @@
 
 namespace App\Tests\Api;
 
-class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
+class MainFormResponsesOnValidRequestsTest extends AbstractMainFormTestCase
 {
     public function testReturnValidDataOnValidRequest(): void
     {
@@ -10,7 +10,7 @@ class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
         $companySymbol = 'AAL';
         $this->setCurrentDate('2001-02-05');
         $client = static::createClient();
-        $this->mockCompanyAdapters();
+        $this->mockAdapters();
         $this->setCompanyQuotesStubData([
             // before range:
             [
@@ -87,16 +87,6 @@ class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
             ],
             $response
         );
-    }
-
-    public function testEmailHasBeenSentOnValidRequest(): void
-    {
-        $this->markTestIncomplete();
-    }
-
-    protected function setCompanyQuotesStubData(array $data): void
-    {
-        $this->getCompanyQuotesAdapter()->setStubData($data);
     }
 
     protected function getCompanyQuotesAdapterRequestParams(): array

@@ -30,3 +30,7 @@ services:
     App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface:
         class: App\Service\CompanyHistoryQuotesAdapter\RapidApiCompanyHistoryQuotesAdapter
         public: true
+
+    App\Service\QuoteRetrievalNotifierInterface:
+        class: App\Service\QuoteRetrievalMailNotifier
+        public: true

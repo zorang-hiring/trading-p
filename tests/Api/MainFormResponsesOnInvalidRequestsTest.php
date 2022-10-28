@@ -2,15 +2,13 @@
 
 namespace App\Tests\Api;
 
-use Carbon\Carbon;
-
-class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
+class MainFormResponsesOnInvalidRequestsTest extends AbstractMainFormTestCase
 {
     public function testReturnErrorWhenFieldsNotPosted(): void
     {
         // GIVEN
         $client = static::createClient();
-        $this->mockCompanyAdapters();
+        $this->mockAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form');
@@ -37,7 +35,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
     {
         // GIVEN
         $client = static::createClient();
-        $this->mockCompanyAdapters();
+        $this->mockAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form', [
@@ -69,7 +67,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
         // GIVEN
         $this->setCurrentDate('2001-02-04');
         $client = static::createClient();
-        $this->mockCompanyAdapters();
+        $this->mockAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form', [
@@ -100,7 +98,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
         // GIVEN
         $this->setCurrentDate('2001-02-02');
         $client = static::createClient();
-        $this->mockCompanyAdapters();
+        $this->mockAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form', [
@@ -131,7 +129,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
         // GIVEN
         $this->setCurrentDate('2001-02-05');
         $client = static::createClient();
-        $this->mockCompanyAdapters();
+        $this->mockAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form', [
