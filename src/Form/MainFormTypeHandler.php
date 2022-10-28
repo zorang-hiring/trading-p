@@ -7,7 +7,6 @@ use App\Entity\Company;
 use App\Service\CompanyFinderBySymbolServiceInterface;
 use App\Service\QuotesRetrievalNotifierInterface;
 use App\Service\QuotesRetrievalServiceInterface;
-use Symfony\Component\Form\Form;
 
 class MainFormTypeHandler
 {
@@ -17,16 +16,14 @@ class MainFormTypeHandler
         protected QuotesRetrievalNotifierInterface $notifier
     ){}
 
-    public function handle(Form $form): array
+    public function handle(MainFormTypeDto $formData): array
     {
-        $formData = $form->getData();
-
-        $company = $this->companyService->getCompanyBySymbol($formData['companySymbol']);
+        $company = $this->getCompany($formData->companySymbol);
 
         $result = $this->quotesService->retrieveQuotes(
             $company,
-            $formData['startDate'],
-            $formData['endDate'],
+            $formData->startDate,
+            $formData->endDate,
         );
 
         $this->sendNotification($formData, $company);
@@ -34,13 +31,18 @@ class MainFormTypeHandler
         return $result;
     }
 
-    private function sendNotification(mixed $formData, Company $company): void
+    private function sendNotification(MainFormTypeDto $formData, Company $company): void
     {
         $notification = new RetrieveCompanyQuotesNotificationDto();
         $notification->forCompanyName = $company->name;
-        $notification->recipient = $formData['email'];
-        $notification->startDate = $formData['startDate']->format('Y-m-d');
-        $notification->endDate = $formData['endDate']->format('Y-m-d');
+        $notification->recipient = $formData->email;
+        $notification->startDate = $formData->startDate->format('Y-m-d');
+        $notification->endDate = $formData->endDate->format('Y-m-d');
         $this->notifier->notify($notification);
+    }
+
+    private function getCompany(string $companySymbol): ?Company
+    {
+        return $this->companyService->getCompanyBySymbol($companySymbol);
     }
 }

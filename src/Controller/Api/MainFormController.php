@@ -2,8 +2,6 @@
 
 namespace App\Controller\Api;
 
-use App\Dto\RetrieveCompanyQuotesNotificationDto;
-use App\Entity\Company;
 use App\Form\MainFormType;
 use App\Form\MainFormTypeHandler;
 use App\Service\CompanyFinderBySymbolServiceInterface;
@@ -28,6 +26,7 @@ class MainFormController extends AbstractController
     {
         $form = $this->createForm(MainFormType::class);
         $form->submit($request->request->all());
+
         if (!$form->isValid()) {
             return $this->buildResponseJsonInvalidForm($form);
         }
@@ -36,7 +35,9 @@ class MainFormController extends AbstractController
             'status' => 'OK',
             'message' => '',
             'errors' => [],
-            'data' => $this->formHandler->handle($form)
+            'data' => $this->formHandler->handle(
+                $form->getData()
+            )
         ]);
     }
 }
