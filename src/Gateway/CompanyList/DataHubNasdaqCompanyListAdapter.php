@@ -18,15 +18,13 @@ class DataHubNasdaqCompanyListAdapter implements CompanyListAdapterInterface
         );
 
         if ($response->getStatusCode() !== 200) {
-            throw new \RuntimeException('Wrong gateway response'); // todo test
+            throw new \RuntimeException('Wrong gateway response');
         }
 
         $result = new CompaniesList();
-
         foreach (json_decode($response->getBody(), true) as $item) {
             $result->addCompany(new Company($item['Symbol'], $item['Company Name']));
         }
-
         return $result;
     }
 

@@ -22,23 +22,45 @@ class DataHubNasdaqCompanyListAdapterTest extends AbstractGatewayTestCase
             ->getMock();
     }
 
-    public function testGetCompanies()
+    /**
+     * @testWith [201]
+     *           [400]
+     *           [500]
+     */
+    public function testGetCompaniesInvalidResponse($responseStatus)
     {
         // GIVEN
         $spy = [];
-        $this->sut
-            ->expects(self::once())
-            ->method('getClient')
-            ->willReturn(
-                $this->mockClient(
-                    new Response(
-                        200,
-                        ['Content-Type' => 'text/plain', 'Content-Encoding' => 'br'],
-                        file_get_contents(__DIR__ . '/../_fixtures/DataHubNasdaqCompanyList.json')
-                    ),
-                    $spy
-                )
-            );
+        $this->mockGetClientOnce(
+            $this->sut,
+            new Response(
+                $responseStatus,
+                ['Content-Type' => 'text/plain', 'Content-Encoding' => 'br'],
+                file_get_contents(__DIR__ . '/../_fixtures/DataHubNasdaqCompanyList.json')
+            ),
+            $spy
+        );
+
+        // EXPECTED
+        self::expectException(\RuntimeException::class);
+
+        // WHEN
+        $this->sut->getCompanies();
+    }
+
+    public function testGetCompaniesSuccess()
+    {
+        // GIVEN
+        $spy = [];
+        $this->mockGetClientOnce(
+            $this->sut,
+            new Response(
+                200,
+                ['Content-Type' => 'text/plain', 'Content-Encoding' => 'br'],
+                file_get_contents(__DIR__ . '/../_fixtures/DataHubNasdaqCompanyList.json')
+            ),
+            $spy
+        );
 
 
         // WHEN

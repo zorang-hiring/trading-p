@@ -8,6 +8,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractGatewayTestCase extends TestCase
@@ -41,7 +42,7 @@ abstract class AbstractGatewayTestCase extends TestCase
      * Mock Guzzle Client
      *
      * @param Response $expectedResponse
-     * @param array $spy
+     * @param array $spy Usually empty array, will be filled since its reference. Will spy Client requests.
      * @return Client
      * @see https://docs.guzzlephp.org/en/stable/testing.html?highlight=test#mock-handler
      */
@@ -50,7 +51,25 @@ abstract class AbstractGatewayTestCase extends TestCase
         $mock = new MockHandler([$expectedResponse]);
         $handlerStack = HandlerStack::create($mock);
         $handlerStack->push(Middleware::history($spy));
-        $client = new Client(['handler' => $handlerStack]);
-        return $client;
+        return new Client(['handler' => $handlerStack]);
+    }
+
+    /**
+     * @param MockObject $mock Any object which has "getClient" method (to be mocked)
+     * @param Response $expectedResponse
+     * @param array $spy Usually empty array, will be filled since its reference. Will spy Client requests.
+     * @return void
+     */
+    protected function mockGetClientOnce(MockObject $mock, Response $expectedResponse, array &$spy): void
+    {
+        $mock
+            ->expects(self::once())
+            ->method('getClient')
+            ->willReturn(
+                $this->mockClient(
+                    $expectedResponse,
+                    $spy
+                )
+            );
     }
 }
