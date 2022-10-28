@@ -6,6 +6,7 @@ use App\Entity\CompaniesList;
 use App\Entity\Company;
 use App\Gateway\CompanyList\DataHubNasdaqCompanyListAdapter;
 use App\Tests\Gateway\AbstractGatewayTestCase;
+use GuzzleHttp\Client;
 use PHPUnit\Framework\MockObject\MockObject;
 use GuzzleHttp\Psr7\Response;
 
@@ -94,5 +95,13 @@ class DataHubNasdaqCompanyListAdapterTest extends AbstractGatewayTestCase
             self::EXPECTED_REQUEST_HEADERS,
             $spy
         );
+    }
+
+    public function testGetClient()
+    {
+        $wrapper = new class extends DataHubNasdaqCompanyListAdapter {
+            public function getProtectedClient(): Client { return $this->getClient(); }
+        };
+        self::assertInstanceOf(Client::class, $wrapper->getProtectedClient());
     }
 }

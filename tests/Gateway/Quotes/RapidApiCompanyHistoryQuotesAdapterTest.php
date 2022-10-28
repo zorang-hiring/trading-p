@@ -6,6 +6,7 @@ use App\Entity\Quote;
 use App\Entity\QuotesList;
 use App\Gateway\Quotes\RapidApiCompanyHistoryQuotesAdapter;
 use App\Tests\Gateway\AbstractGatewayTestCase;
+use GuzzleHttp\Client;
 use PHPUnit\Framework\MockObject\MockObject;
 use GuzzleHttp\Psr7\Response;
 
@@ -107,5 +108,13 @@ class RapidApiCompanyHistoryQuotesAdapterTest extends AbstractGatewayTestCase
             self::EXPECTED_REQUEST_HEADERS,
             $spy
         );
+    }
+
+    public function testGetClient()
+    {
+        $wrapper = new class extends RapidApiCompanyHistoryQuotesAdapter {
+            public function getProtectedClient(): Client { return $this->getClient(); }
+        };
+        self::assertInstanceOf(Client::class, $wrapper->getProtectedClient());
     }
 }
