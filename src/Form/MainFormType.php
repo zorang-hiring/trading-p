@@ -2,6 +2,7 @@
 
 namespace Form;
 
+use App\Validator\ContainsValidCompanySymbol;
 use Carbon\Carbon;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -23,6 +24,7 @@ class MainFormType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank(),
+                    new ContainsValidCompanySymbol()
                 ]
             ])
             ->add('startDate', DateType::class, [

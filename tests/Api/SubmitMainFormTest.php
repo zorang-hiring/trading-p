@@ -2,7 +2,9 @@
 
 namespace App\Tests\Api;
 
+use App\Service\CompanyService\CompanyListAdapterInterface;
 use Carbon\Carbon;
+use App\Tests\Service\CompanyService\CompanyServiceAdapterStub;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -10,8 +12,11 @@ class SubmitMainFormTest extends WebTestCase
 {
     public function testReturnErrorWhenFieldsNotPosted(): void
     {
-        // WHEN
+        // GIVEN
         $client = static::createClient();
+        $this->mockCompanyListAdapter();
+
+        // WHEN
         $client->request('POST', '/api/main-form');
 
         // THEN
@@ -34,10 +39,13 @@ class SubmitMainFormTest extends WebTestCase
 
     public function testReturnErrorWhenFieldsAreInIvalidFormat(): void
     {
-        // WHEN
+        // GIVEN
         $client = static::createClient();
+        $this->mockCompanyListAdapter();
+
+        // WHEN
         $client->request('POST', '/api/main-form', [
-            'companySymbol' => 'a',
+            'companySymbol' => 'AAIT',
             'startDate' => 'b',
             'endDate' => 'c',
             'email' => 'd',
@@ -62,12 +70,14 @@ class SubmitMainFormTest extends WebTestCase
 
     public function testReturnErrorWhenEndDateIsLessThenStartDate(): void
     {
+        // GIVEN
         Carbon::setTestNow(Carbon::createFromDate(2001, 2, 4));
+        $client = static::createClient();
+        $this->mockCompanyListAdapter();
 
         // WHEN
-        $client = static::createClient();
         $client->request('POST', '/api/main-form', [
-            'companySymbol' => 'a',
+            'companySymbol' => 'AAIT',
             'startDate' => '2001-02-04',
             'endDate' => '2001-02-03',
             'email' => 'some@email.com',
@@ -93,11 +103,12 @@ class SubmitMainFormTest extends WebTestCase
     {
         // GIVEN
         Carbon::setTestNow(Carbon::createFromDate(2001, 2, 2));
+        $client = static::createClient();
+        $this->mockCompanyListAdapter();
 
         // WHEN
-        $client = static::createClient();
         $client->request('POST', '/api/main-form', [
-            'companySymbol' => 'a',
+            'companySymbol' => 'AAIT',
             'startDate' => '2001-02-03',
             'endDate' => '2001-02-03',
             'email' => 'some@email.com',
@@ -119,17 +130,55 @@ class SubmitMainFormTest extends WebTestCase
         );
     }
 
+    public function testReturnErrorWhenCompanySymbolDoesNotExist(): void
+    {
+        // GIVEN
+        Carbon::setTestNow(Carbon::createFromDate(2001, 2, 5));
+        $client = static::createClient();
+        $this->mockCompanyListAdapter();
+
+        // WHEN
+        $client->request('POST', '/api/main-form', [
+            'companySymbol' => 'ABCD',
+            'startDate' => '2001-02-03',
+            'endDate' => '2001-02-03',
+            'email' => 'some@email.com',
+        ]);
+
+        // THEN
+        $response = $client->getResponse();
+        $this->assertResponseHasStatus(400, $response);
+        $this->assertResponseJsonContent(
+            [
+                'status' => 'NOK',
+                'message' => 'Invalid Request',
+                'errors' => [
+                    'companySymbol' => ['The string "ABCD" is not valid Company Symbol.'],
+                ]
+            ],
+            $response
+        );
+    }
+
     protected function assertResponseHasStatus(int $expectedStatus, Response $actualResponse): void
     {
         $this->assertSame($expectedStatus, $actualResponse->getStatusCode());
     }
 
-    public function assertResponseJsonContent(array $expectedJson, Response $response): void
+    protected function assertResponseJsonContent(array $expectedJson, Response $response): void
     {
         $this->assertJsonStringEqualsJsonString(
             json_encode($expectedJson),
             $actual = $response->getContent(),
             sprintf('Expected JSON "%s" not equal to "%s"', json_encode($expectedJson), $actual)
+        );
+    }
+
+    private function mockCompanyListAdapter(): void
+    {
+        $this->getContainer()->set(
+            CompanyListAdapterInterface::class,
+            new CompanyServiceAdapterStub()
         );
     }
 }
