@@ -14,13 +14,13 @@ class CompaniesList
         $this->companies[] = $company;
     }
 
-    public function hasCompanyWithSymbol(string $companySymbol): bool
+    public function findBySymbol(string $companySymbol): ?Company
     {
         foreach ($this->companies as $company) {
             if ($company->symbol === $companySymbol) {
-                return true;
+                return $company;
             }
         }
-        return false;
+        return null;
     }
 }

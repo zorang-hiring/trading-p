@@ -35,7 +35,7 @@ class CompanyServiceAdapterStub implements CompanyListAdapterInterface
         $result = new CompaniesList();
         foreach ($this->dataStub as $item) {
             $result->addCompany(
-                new Company($item['Symbol'])
+                new Company($item['Symbol'], $item['Company Name'])
             );
         }
         return $result;

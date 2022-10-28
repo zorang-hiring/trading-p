@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Gateway\CompanyListGateway\CompanyListAdapterInterface;
 use App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface;
 use DateTime;
 use DateTimeInterface;
@@ -10,7 +9,6 @@ use DateTimeInterface;
 class QuotesService implements QuotesRetrievalServiceInterface
 {
     public function __construct(
-        protected CompanyListAdapterInterface $companyListAdapter,
         protected CompanyHistoryQuotesAdapterInterface $companyHistoryQuotesAdapter
     ){}
 

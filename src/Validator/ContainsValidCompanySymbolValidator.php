@@ -2,7 +2,7 @@
 
 namespace App\Validator;
 
-use App\Service\CompanySymbolValidationServiceInterface;
+use App\Service\CompanyFinderBySymbolServiceInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 class ContainsValidCompanySymbolValidator extends ConstraintValidator
 {
     public function __construct(
-        protected CompanySymbolValidationServiceInterface $companyService
+        protected CompanyFinderBySymbolServiceInterface $companyService
     )
     {}
 
@@ -26,7 +26,7 @@ class ContainsValidCompanySymbolValidator extends ConstraintValidator
             return;
         }
 
-        if (!$this->companyService->isValidCompanySymbol($value)) {
+        if (!$this->companyService->getCompanyBySymbol($value)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ string }}', (string) $value)
                 ->addViolation();

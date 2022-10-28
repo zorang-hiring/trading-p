@@ -2,20 +2,19 @@
 
 namespace App\Service;
 
+use App\Entity\Company;
 use App\Gateway\CompanyListGateway\CompanyListAdapterInterface;
-use App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface;
 
-class CompanyService implements CompanySymbolValidationServiceInterface
+class CompanyService implements CompanyFinderBySymbolServiceInterface
 {
     public function __construct(
-        protected CompanyListAdapterInterface $companyListAdapter,
-        protected CompanyHistoryQuotesAdapterInterface $companyHistoryQuotesAdapter
+        protected CompanyListAdapterInterface $companyListAdapter
     ){}
 
-    public function isValidCompanySymbol($companySymbol): bool
+    public function getCompanyBySymbol(string $companySymbol): ?Company
     {
         return $this->companyListAdapter
             ->getCompanies()
-            ->hasCompanyWithSymbol($companySymbol);
+            ->findBySymbol($companySymbol);
     }
 }
