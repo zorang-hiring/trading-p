@@ -6,8 +6,6 @@ use App\Dto\RetrieveCompanyQuotesNotificationDto;
 use App\Form\MainFormType;
 use App\Service\QuotesRetrievalNotifierInterface;
 use App\Service\QuotesRetrievalServiceInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +23,7 @@ class MainFormController extends AbstractController
     {
         $form = $this->createForm(MainFormType::class);
         $form->submit($request->request->all());
+
         if (!$form->isValid()) {
             return $this->buildResponseJsonInvalidForm($form);
         }
@@ -45,19 +44,6 @@ class MainFormController extends AbstractController
         $this->sendNotification($formData);
 
         return $result;
-    }
-
-    public function buildResponseJsonInvalidForm(FormInterface $form): JsonResponse
-    {
-        $errors = [];
-        foreach ($form->getErrors(true) as $k => $error) {
-            $errors[$error->getOrigin()->getName()] = [$error->getMessage()];
-        }
-        return new JsonResponse([
-            'status' => 'NOK',
-            'message' => 'Invalid Request',
-            'errors' => $errors
-        ], 400);
     }
 
     private function sendNotification(mixed $formData): void
