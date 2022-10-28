@@ -26,7 +26,8 @@ class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
             [
                 'status' => 'OK',
                 'message' => '',
-                'errors' => []
+                'errors' => [],
+                'data' => []
             ],
             $response
         );

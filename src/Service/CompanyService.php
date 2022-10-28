@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface;
 use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
+use DateTimeInterface;
 
 class CompanyService implements CompanySymbolValidationServiceInterface, CompanyHistoryQuotesServiceInterface
 {
@@ -19,8 +20,10 @@ class CompanyService implements CompanySymbolValidationServiceInterface, Company
             ->hasCompanyWithSymbol($companySymbol);
     }
 
-    public function getQuotes(string $companySymbol, string $startDate, string $endDate)
+    public function getQuotes(string $companySymbol, DateTimeInterface $startDate, DateTimeInterface $endDate): array
     {
         $data = $this->companyHistoryQuotesAdapter->getQuotes($companySymbol);
+
+        return [];
     }
 }

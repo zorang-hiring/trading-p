@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Service\CompanyHistoryQuotesServiceInterface;
 use Form\MainFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -13,9 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainFormController extends AbstractController
 {
     public function __construct(
-
-    )
-    {}
+        protected CompanyHistoryQuotesServiceInterface $companyQuotesService
+    ){}
 
     #[Route('/api/main-form', name: 'api_main_form', methods: ['POST'])]
     public function submit(Request $request): Response
@@ -25,12 +25,18 @@ class MainFormController extends AbstractController
         if (!$form->isValid()) {
             return $this->buildResponseJsonInvalidForm($form);
         }
-        // $data = $form->getData();
+
+        $formData = $form->getData();
 
         return new JsonResponse([
             'status' => 'OK',
             'message' => '',
-            'errors' => []
+            'errors' => [],
+            'data' => $this->companyQuotesService->getQuotes(
+                $formData['companySymbol'],
+                $formData['startDate'],
+                $formData['endDate'],
+            )
         ]);
     }
 
