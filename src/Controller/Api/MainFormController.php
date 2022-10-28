@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use Form\MainFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,19 +16,9 @@ class MainFormController extends AbstractController
     public function submit(Request $request): Response
     {
         $form = $this->createForm(MainFormType::class);
-
         $form->submit($request->request->all());
         if (!$form->isValid()) {
-
-            $errors = [];
-            foreach ($form->getErrors(true) as $k => $error) {
-                $errors[$error->getOrigin()->getName()] = [$error->getMessage()];
-            }
-            return new JsonResponse([
-                'status' => 'NOK',
-                'message' => 'Invalid Request',
-                'errors' => $errors
-            ]);
+            return $this->buildResponseJsonInvalidForm($form);
         }
         echo 222;
         // $form->getData() holds the submitted values
@@ -49,5 +40,18 @@ class MainFormController extends AbstractController
 //                'email' => ['Field is required.']
 //            ]
 //        ]);
+    }
+
+    public function buildResponseJsonInvalidForm(FormInterface $form): JsonResponse
+    {
+        $errors = [];
+        foreach ($form->getErrors(true) as $k => $error) {
+            $errors[$error->getOrigin()->getName()] = [$error->getMessage()];
+        }
+        return new JsonResponse([
+            'status' => 'NOK',
+            'message' => 'Invalid Request',
+            'errors' => $errors
+        ]);
     }
 }
