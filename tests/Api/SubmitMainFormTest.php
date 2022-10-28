@@ -2,6 +2,7 @@
 
 namespace App\Tests\Api;
 
+use Carbon\Carbon;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -61,6 +62,8 @@ class SubmitMainFormTest extends WebTestCase
 
     public function testReturnErrorWhenEndDateIsLessThenStartDate(): void
     {
+        Carbon::setTestNow(Carbon::createFromDate(2001, 2, 4));
+
         // WHEN
         $client = static::createClient();
         $client->request('POST', '/api/main-form', [
@@ -80,6 +83,36 @@ class SubmitMainFormTest extends WebTestCase
                 'errors' => [
                     'startDate' => ['Has to be less or equal then endDate.'],
                     'endDate' => ['Has to be greater or equal then startDate.'],
+                ]
+            ],
+            $response
+        );
+    }
+
+    public function testReturnErrorWhenEndDateAndStartDateAreLessThenCurrentDate(): void
+    {
+        // GIVEN
+        Carbon::setTestNow(Carbon::createFromDate(2001, 2, 2));
+
+        // WHEN
+        $client = static::createClient();
+        $client->request('POST', '/api/main-form', [
+            'companySymbol' => 'a',
+            'startDate' => '2001-02-03',
+            'endDate' => '2001-02-03',
+            'email' => 'some@email.com',
+        ]);
+
+        // THEN
+        $response = $client->getResponse();
+        $this->assertResponseHasStatus(400, $response);
+        $this->assertResponseJsonContent(
+            [
+                'status' => 'NOK',
+                'message' => 'Invalid Request',
+                'errors' => [
+                    'startDate' => ['Has to be less or equal then current date.'],
+                    'endDate' => ['Has to be less or equal then current date.'],
                 ]
             ],
             $response

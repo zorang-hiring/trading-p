@@ -2,6 +2,7 @@
 
 namespace Form;
 
+use Carbon\Carbon;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -34,6 +35,10 @@ class MainFormType extends AbstractType
                     new LessThanOrEqual([
                         'propertyPath' => 'parent.all[endDate].data',
                         'message' => 'Has to be less or equal then endDate.'
+                    ]),
+                    new LessThanOrEqual([
+                        'value' => Carbon::now(),
+                        'message' => 'Has to be less or equal then current date.'
                     ])
                 ]
             ])
@@ -47,6 +52,10 @@ class MainFormType extends AbstractType
                     new GreaterThanOrEqual([
                         'propertyPath' => 'parent.all[startDate].data',
                         'message' => 'Has to be greater or equal then startDate.'
+                    ]),
+                    new LessThanOrEqual([
+                        'value' => Carbon::now(),
+                        'message' => 'Has to be less or equal then current date.'
                     ])
                 ]
             ])
