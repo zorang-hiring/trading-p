@@ -7,7 +7,7 @@ use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
 use DateTimeInterface;
 use DateTime;
 
-class CompanyQuotesService implements CompanySymbolValidationServiceInterface, CompanyHistoryQuotesServiceInterface
+class QuotesService implements CompanySymbolValidationServiceInterface, QuotesRetrievalServiceInterface
 {
     public function __construct(
         protected CompanyListAdapterInterface $companyListAdapter,
@@ -21,7 +21,7 @@ class CompanyQuotesService implements CompanySymbolValidationServiceInterface, C
             ->hasCompanyWithSymbol($companySymbol);
     }
 
-    public function getQuotes(string $companySymbol, DateTimeInterface $startDate, DateTimeInterface $endDate): array
+    public function retrieveQuotes(string $companySymbol, DateTimeInterface $startDate, DateTimeInterface $endDate): array
     {
         // make precise data range boundaries
         $startDateUnix = $this->dateTimeStringToUnix($startDate->format('Y-m-d 00:00:00'));

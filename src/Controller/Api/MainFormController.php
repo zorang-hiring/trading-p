@@ -2,8 +2,10 @@
 
 namespace App\Controller\Api;
 
-use App\Service\CompanyHistoryQuotesServiceInterface;
+use App\Service\QuotesRetrievalServiceInterface;
 use App\Form\MainFormType;
+use App\Service\QuoteRetrievalNotifier\RetrieveCompanyQuotesNotificationDto;
+use App\Service\QuoteRetrievalNotifierInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,7 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainFormController extends AbstractController
 {
     public function __construct(
-        protected CompanyHistoryQuotesServiceInterface $companyQuotesService
+        protected QuotesRetrievalServiceInterface $companyQuotesService,
+        protected QuoteRetrievalNotifierInterface $notifier
     ){}
 
     #[Route('/api/main-form', name: 'api_main_form', methods: ['POST'])]
@@ -28,16 +31,20 @@ class MainFormController extends AbstractController
 
         $formData = $form->getData();
 
-        return new JsonResponse([
+        $result = new JsonResponse([
             'status' => 'OK',
             'message' => '',
             'errors' => [],
-            'data' => $this->companyQuotesService->getQuotes(
+            'data' => $this->companyQuotesService->retrieveQuotes(
                 $formData['companySymbol'],
                 $formData['startDate'],
                 $formData['endDate'],
             )
         ]);
+
+        $this->sendNotification($formData);
+
+        return $result;
     }
 
     public function buildResponseJsonInvalidForm(FormInterface $form): JsonResponse
@@ -51,5 +58,14 @@ class MainFormController extends AbstractController
             'message' => 'Invalid Request',
             'errors' => $errors
         ], 400);
+    }
+
+    private function sendNotification(mixed $formData): void
+    {
+        $notification = new RetrieveCompanyQuotesNotificationDto();
+        $notification->recipient = $formData['email'];
+        $notification->startDate = $formData['startDate']->format('Y-m-d');
+        $notification->endDate = $formData['endDate']->format('Y-m-d');
+        $this->notifier->notify($notification);
     }
 }
