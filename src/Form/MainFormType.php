@@ -29,6 +29,7 @@ class MainFormType extends AbstractType
             ])
             ->add('startDate', DateType::class, [
                 'required' => true,
+                'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'invalid_message' => 'Accepted date format is YYYY-MM-DD.',
@@ -46,6 +47,7 @@ class MainFormType extends AbstractType
             ])
             ->add('endDate', DateType::class, [
                 'required' => true,
+                'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'invalid_message' => 'Accepted date format is YYYY-MM-DD.',
