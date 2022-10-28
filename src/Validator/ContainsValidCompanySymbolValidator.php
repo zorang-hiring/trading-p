@@ -16,10 +16,6 @@ class ContainsValidCompanySymbolValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
-        if (!$constraint instanceof ContainsValidCompanySymbol) {
-            throw new UnexpectedTypeException($constraint, ContainsValidCompanySymbol::class);
-        }
-
         // custom constraints should ignore null and empty values to allow
         // other constraints (NotBlank, NotNull, etc.) to take care of that
         if (null === $value || '' === $value) {
