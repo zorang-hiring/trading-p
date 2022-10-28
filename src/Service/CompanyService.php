@@ -24,6 +24,6 @@ class CompanyService implements CompanySymbolValidationServiceInterface, Company
     {
         $data = $this->companyHistoryQuotesAdapter->getQuotes($companySymbol);
 
-        return [];
+        return $data->getQuotes();
     }
 }

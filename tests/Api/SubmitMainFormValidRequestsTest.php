@@ -13,15 +13,15 @@ class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
         $this->mockCompanyAdapters();
         $this->setCompanyQuotesStubData([
             // before range
+            // in range
             [
                 "date" => 1666970264,
-                "open" => 136.3800048828125,
-                "high" => 137.34500122070312,
-                "low" => 135.0500030517578,
-                "close" => 136.85000610351562,
-                "volume" => 313087
+                "open" => 2.2,
+                "high" => 4.4,
+                "low" => 1.1,
+                "close" => 3.3,
+                "volume" => 5
             ]
-            // in range
             // after range
         ]);
 
@@ -42,7 +42,16 @@ class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
                 'status' => 'OK',
                 'message' => '',
                 'errors' => [],
-                'data' => []
+                'data' => [
+                    [
+                        "date" => 1666970264,
+                        "open" => 2.2,
+                        "high" => 4.4,
+                        "low" => 1.1,
+                        "close" => 3.3,
+                        "volume" => 5
+                    ]
+                ]
             ],
             $response
         );

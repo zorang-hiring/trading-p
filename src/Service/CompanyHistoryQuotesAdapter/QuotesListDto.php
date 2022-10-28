@@ -10,4 +10,9 @@ class QuotesListDto
     {
         $this->data[] = $quote;
     }
+
+    public function getQuotes(): array
+    {
+        return $this->data;
+    }
 }
