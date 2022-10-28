@@ -7,7 +7,7 @@ use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
 use DateTimeInterface;
 use DateTime;
 
-class CompanyService implements CompanySymbolValidationServiceInterface, CompanyHistoryQuotesServiceInterface
+class CompanyQuotesService implements CompanySymbolValidationServiceInterface, CompanyHistoryQuotesServiceInterface
 {
     public function __construct(
         protected CompanyListAdapterInterface $companyListAdapter,
