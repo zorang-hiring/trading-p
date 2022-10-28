@@ -65,9 +65,4 @@ abstract class AbstractMainFormTestCase extends AbstractWebTestCase
             new QuoteRetrievalNotifierSpy()
         );
     }
-
-    protected function setCompanyQuotesStubData(array $data): void
-    {
-        $this->getCompanyQuotesAdapter()->setStubData($data);
-    }
 }

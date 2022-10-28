@@ -111,4 +111,9 @@ class MainFormResponsesOnValidRequestsTest extends AbstractMainFormTestCase
     {
         return \DateTime::createFromFormat('Y-m-d H:i:s', $date . ' 12:00:00')->getTimestamp();
     }
+
+    protected function setCompanyQuotesStubData(array $data): void
+    {
+        $this->getCompanyQuotesAdapter()->setStubData($data);
+    }
 }

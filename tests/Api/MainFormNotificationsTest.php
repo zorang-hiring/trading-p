@@ -34,7 +34,6 @@ class MainFormNotificationsTest extends AbstractMainFormTestCase
         $this->setCurrentDate('2001-02-05');
         $client = static::createClient();
         $this->mockAdapters();
-        $this->setCompanyQuotesStubData([]);
 
         // WHEN
         $client->request('POST', '/api/main-form', [
@@ -58,9 +57,7 @@ class MainFormNotificationsTest extends AbstractMainFormTestCase
 
     private function assertEmailHasNotBeenSent()
     {
-        self::assertEmpty(
-            $this->getQuoteRetrievalNotifierSpy()->getNotifications()
-        );
+        self::assertEmpty($this->getQuoteRetrievalNotifierSpy()->getNotifications());
     }
 
     private function assertEmailHasBeenSent(RetrieveCompanyQuotesNotificationDto $expectedNotification)
