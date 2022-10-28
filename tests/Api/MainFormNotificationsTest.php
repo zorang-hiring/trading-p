@@ -3,9 +3,12 @@
 namespace App\Tests\Api;
 
 use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotificationDto;
+use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 
 class MainFormNotificationsTest extends AbstractMainFormTestCase
 {
+    use MailerAssertionsTrait;
+
     public function testEmailNotSentOnInvalidRequest()
     {
         // GIVEN
@@ -57,15 +60,26 @@ class MainFormNotificationsTest extends AbstractMainFormTestCase
 
     private function assertEmailHasNotBeenSent()
     {
-        self::assertEmpty($this->getQuoteRetrievalNotifierSpy()->getNotifications());
+        $this->assertEmailCount(0);
     }
 
     private function assertEmailHasBeenSent(QuotesRetrievalNotificationDto $expectedNotification)
     {
-        self::assertCount(1, $notifications = $this->getQuoteRetrievalNotifierSpy()->getNotifications());
-        self::assertEquals(
-            $expectedNotification,
-            $notifications[0]
+        $this->assertEmailCount(1);
+
+        $email = $this->getMailerMessage();
+
+        self::assertStringContainsString(
+            'To: ' . $expectedNotification->recipient,
+            $email->toString()
         );
+        self::assertStringContainsString(
+            'Subject: ' . $expectedNotification->forCompanyName,
+            $email->toString()
+        );
+
+        $body = sprintf('From %s to %s', $expectedNotification->startDate, $expectedNotification->endDate);
+        $this->assertEmailTextBodyContains($email, $body);
+        $this->assertEmailHtmlBodyContains($email, $body);
     }
 }

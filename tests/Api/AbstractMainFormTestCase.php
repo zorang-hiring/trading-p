@@ -3,10 +3,8 @@
 namespace App\Tests\Api;
 
 use App\Gateway\CompanyList\CompanyListAdapterInterface;
-use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface;
 use App\Gateway\Quotes\CompanyHistoryQuotesAdapterInterface;
 use App\Tests\Gateway\CompanyList\CompanyListAdapterStub;
-use App\Tests\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierSpy;
 use App\Tests\Gateway\Quotes\CompanyHistoryQuotesAdapterSpy;
 
 abstract class AbstractMainFormTestCase extends AbstractWebTestCase
@@ -32,7 +30,6 @@ abstract class AbstractMainFormTestCase extends AbstractWebTestCase
         $this->mockCompanyListAdapter();
         $this->mockCompanyQuotesAdapter();
         $this->resetCompanyQuotesAdapterSpy();
-        $this->mockQuoteRetrievalNotifier();
     }
 
     private function resetCompanyQuotesAdapterSpy(): void
@@ -47,22 +44,5 @@ abstract class AbstractMainFormTestCase extends AbstractWebTestCase
             CompanyHistoryQuotesAdapterInterface::class,
         );
         return $adapter;
-    }
-
-    protected function getQuoteRetrievalNotifierSpy(): QuotesRetrievalNotifierSpy
-    {
-        /** @var QuotesRetrievalNotifierSpy $object */
-        $object = $this->getContainer()->get(
-            QuotesRetrievalNotifierInterface::class,
-        );
-        return $object;
-    }
-
-    private function mockQuoteRetrievalNotifier(): void
-    {
-        $this->getContainer()->set(
-            QuotesRetrievalNotifierInterface::class,
-            new QuotesRetrievalNotifierSpy()
-        );
     }
 }
