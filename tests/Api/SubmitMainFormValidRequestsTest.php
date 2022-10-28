@@ -48,6 +48,11 @@ class SubmitMainFormValidRequestsTest extends AbstractSubmitMainFormTestCase
         );
     }
 
+    public function testEmailHasBeenSentOnValidRequest(): void
+    {
+        $this->markTestIncomplete();
+    }
+
     protected function setCompanyQuotesStubData(array $data): void
     {
         $this->getCompanyQuotesAdapter()->setStubData($data);
