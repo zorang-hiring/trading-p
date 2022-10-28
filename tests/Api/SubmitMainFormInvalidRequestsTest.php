@@ -10,7 +10,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
     {
         // GIVEN
         $client = static::createClient();
-        $this->mockCompanyListAdapter();
+        $this->mockCompanyAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form');
@@ -37,7 +37,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
     {
         // GIVEN
         $client = static::createClient();
-        $this->mockCompanyListAdapter();
+        $this->mockCompanyAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form', [
@@ -69,7 +69,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
         // GIVEN
         Carbon::setTestNow(Carbon::createFromDate(2001, 2, 4));
         $client = static::createClient();
-        $this->mockCompanyListAdapter();
+        $this->mockCompanyAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form', [
@@ -100,7 +100,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
         // GIVEN
         Carbon::setTestNow(Carbon::createFromDate(2001, 2, 2));
         $client = static::createClient();
-        $this->mockCompanyListAdapter();
+        $this->mockCompanyAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form', [
@@ -131,7 +131,7 @@ class SubmitMainFormInvalidRequestsTest extends AbstractSubmitMainFormTestCase
         // GIVEN
         Carbon::setTestNow(Carbon::createFromDate(2001, 2, 5));
         $client = static::createClient();
-        $this->mockCompanyListAdapter();
+        $this->mockCompanyAdapters();
 
         // WHEN
         $client->request('POST', '/api/main-form', [
