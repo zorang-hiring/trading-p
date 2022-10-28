@@ -2,10 +2,8 @@
 
 namespace App\Service;
 
-use App\Service\QuotesAdapter\CompanyHistoryQuotesAdapterInterface;
-use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
-use DateTimeInterface;
-use DateTime;
+use App\Gateway\CompanyListGateway\CompanyListAdapterInterface;
+use App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface;
 
 class CompanyService implements CompanySymbolValidationServiceInterface
 {

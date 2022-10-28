@@ -4,7 +4,7 @@ namespace App\Tests\Service\CompanyHistoryQuotesAdapter;
 
 use App\Entity\QuoteDto;
 use App\Entity\QuotesListDto;
-use App\Service\QuotesAdapter\CompanyHistoryQuotesAdapterInterface;
+use App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface;
 
 class CompanyHistoryQuotesAdapterSpy implements CompanyHistoryQuotesAdapterInterface
 {

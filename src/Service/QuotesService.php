@@ -2,10 +2,10 @@
 
 namespace App\Service;
 
-use App\Service\QuotesAdapter\CompanyHistoryQuotesAdapterInterface;
-use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
-use DateTimeInterface;
+use App\Gateway\CompanyListGateway\CompanyListAdapterInterface;
+use App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface;
 use DateTime;
+use DateTimeInterface;
 
 class QuotesService implements QuotesRetrievalServiceInterface
 {

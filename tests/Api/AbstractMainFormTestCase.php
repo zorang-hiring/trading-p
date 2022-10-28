@@ -2,8 +2,8 @@
 
 namespace App\Tests\Api;
 
-use App\Service\QuotesAdapter\CompanyHistoryQuotesAdapterInterface;
-use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
+use App\Gateway\CompanyListGateway\CompanyListAdapterInterface;
+use App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface;
 use App\Service\QuotesRetrievalNotifierInterface;
 use App\Tests\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterSpy;
 use App\Tests\Service\CompanyService\CompanyServiceAdapterStub;

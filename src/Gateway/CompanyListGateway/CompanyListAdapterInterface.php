@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\CompanyListAdapter;
+namespace App\Gateway\CompanyListGateway;
 
 use App\Entity\CompaniesListDto;
 

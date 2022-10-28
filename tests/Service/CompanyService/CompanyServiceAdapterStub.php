@@ -5,7 +5,7 @@ namespace App\Tests\Service\CompanyService;
 
 use App\Entity\CompaniesListDto;
 use App\Entity\CompanyDto;
-use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
+use App\Gateway\CompanyListGateway\CompanyListAdapterInterface;
 
 class CompanyServiceAdapterStub implements CompanyListAdapterInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\QuotesAdapter;
+namespace App\Gateway\QuotesGateway;
 
 use App\Entity\QuotesListDto;
 
