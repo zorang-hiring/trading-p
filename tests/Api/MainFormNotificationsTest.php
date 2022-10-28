@@ -49,7 +49,7 @@ class MainFormNotificationsTest extends AbstractMainFormTestCase
 
         $expectedEmailNotification = new RetrieveCompanyQuotesNotificationDto();
         $expectedEmailNotification->recipient = 'some@email.com';
-//        $expectedEmailNotification->forCompanyName = '2001-02-03';
+        $expectedEmailNotification->forCompanyName = 'American Airlines Group, Inc.';
         $expectedEmailNotification->startDate = '2001-01-11';
         $expectedEmailNotification->endDate = '2001-02-03';
         $this->assertEmailHasBeenSent($expectedEmailNotification);

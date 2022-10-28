@@ -3,7 +3,9 @@
 namespace App\Controller\Api;
 
 use App\Dto\RetrieveCompanyQuotesNotificationDto;
+use App\Entity\Company;
 use App\Form\MainFormType;
+use App\Service\CompanyFinderBySymbolServiceInterface;
 use App\Service\QuotesRetrievalNotifierInterface;
 use App\Service\QuotesRetrievalServiceInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,7 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainFormController extends AbstractController
 {
     public function __construct(
-        protected QuotesRetrievalServiceInterface $companyQuotesService,
+        protected CompanyFinderBySymbolServiceInterface $companyService,
+        protected QuotesRetrievalServiceInterface $quotesService,
         protected QuotesRetrievalNotifierInterface $notifier
     ){}
 
@@ -30,25 +33,28 @@ class MainFormController extends AbstractController
 
         $formData = $form->getData();
 
+        $company = $this->companyService->getCompanyBySymbol($formData['companySymbol']);
+
         $result = new JsonResponse([
             'status' => 'OK',
             'message' => '',
             'errors' => [],
-            'data' => $this->companyQuotesService->retrieveQuotes(
-                $formData['companySymbol'],
+            'data' => $this->quotesService->retrieveQuotes(
+                $company,
                 $formData['startDate'],
                 $formData['endDate'],
             )
         ]);
 
-        $this->sendNotification($formData);
+        $this->sendNotification($formData, $company);
 
         return $result;
     }
 
-    private function sendNotification(mixed $formData): void
+    private function sendNotification(mixed $formData, Company $company): void
     {
         $notification = new RetrieveCompanyQuotesNotificationDto();
+        $notification->forCompanyName = $company->name;
         $notification->recipient = $formData['email'];
         $notification->startDate = $formData['startDate']->format('Y-m-d');
         $notification->endDate = $formData['endDate']->format('Y-m-d');

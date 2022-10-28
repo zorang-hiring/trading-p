@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Company;
 use App\Gateway\QuotesGateway\CompanyHistoryQuotesAdapterInterface;
 use DateTime;
 use DateTimeInterface;
@@ -12,7 +13,7 @@ class QuotesService implements QuotesRetrievalServiceInterface
         protected CompanyHistoryQuotesAdapterInterface $companyHistoryQuotesAdapter
     ){}
 
-    public function retrieveQuotes(string $companySymbol, DateTimeInterface $startDate, DateTimeInterface $endDate): array
+    public function retrieveQuotes(Company $company, DateTimeInterface $startDate, DateTimeInterface $endDate): array
     {
         // make precise data range boundaries
         $startDateUnix = $this->dateTimeStringToUnix($startDate->format('Y-m-d 00:00:00'));
@@ -20,7 +21,7 @@ class QuotesService implements QuotesRetrievalServiceInterface
 
         // get and filter results
         $result = [];
-        foreach ($this->getHistoryQuotes($companySymbol) as $quote) {
+        foreach ($this->getHistoryQuotes($company->symbol) as $quote) {
             if ($quote->date < $startDateUnix || $endDateUnix < $quote->date) {
                 continue;
             }

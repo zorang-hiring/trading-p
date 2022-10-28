@@ -2,9 +2,10 @@
 
 namespace App\Service;
 
+use App\Entity\Company;
 use DateTimeInterface;
 
 interface QuotesRetrievalServiceInterface
 {
-    public function retrieveQuotes(string $companySymbol, DateTimeInterface $startDate, DateTimeInterface $endDate);
+    public function retrieveQuotes(Company $company, DateTimeInterface $startDate, DateTimeInterface $endDate);
 }
