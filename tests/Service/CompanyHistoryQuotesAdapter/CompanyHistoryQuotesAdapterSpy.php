@@ -6,23 +6,41 @@ use App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface
 use App\Service\CompanyHistoryQuotesAdapter\QuoteDto;
 use App\Service\CompanyHistoryQuotesAdapter\QuotesListDto;
 
-class CompanyHistoryQuotesAdapterStub implements CompanyHistoryQuotesAdapterInterface
+class CompanyHistoryQuotesAdapterSpy implements CompanyHistoryQuotesAdapterInterface
 {
-    protected array $stubData = [
-        'prices' => [
-            [
-                "date" => 1666970264,
-                "open" => 136.3800048828125,
-                "high" => 137.34500122070312,
-                "low" => 135.0500030517578,
-                "close" => 136.85000610351562,
-                "volume" => 313087
-            ]
-        ]
-    ];
+    protected array $requestedParamsSpy;
+
+    protected array $stubData;
+
+    public function __construct()
+    {
+        $this->reset();
+    }
+
+    public function reset(): void
+    {
+        $this->requestedParamsSpy = [
+            'companySymbol' => null
+        ];
+        $this->stubData = [
+            'prices' => []
+        ];
+    }
+
+    public function getRequestedParamsSpy(): array
+    {
+        return $this->requestedParamsSpy;
+    }
+
+    public function setStubData(array $data)
+    {
+        $this->stubData['prices'] = $data;
+    }
 
     public function getQuotes(string $companySymbol): QuotesListDto
     {
+        $this->requestedParamsSpy['companySymbol'] = $companySymbol;
+
         $result = new QuotesListDto();
         foreach ($this->stubData['prices'] as $data) {
             $quote = new QuoteDto();

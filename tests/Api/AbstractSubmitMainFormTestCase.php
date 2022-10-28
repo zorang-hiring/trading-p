@@ -4,7 +4,7 @@ namespace App\Tests\Api;
 
 use App\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterInterface;
 use App\Service\CompanyListAdapter\CompanyListAdapterInterface;
-use App\Tests\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterStub;
+use App\Tests\Service\CompanyHistoryQuotesAdapter\CompanyHistoryQuotesAdapterSpy;
 use App\Tests\Service\CompanyService\CompanyServiceAdapterStub;
 
 abstract class AbstractSubmitMainFormTestCase extends AbstractWebTestCase
@@ -21,7 +21,7 @@ abstract class AbstractSubmitMainFormTestCase extends AbstractWebTestCase
     {
         $this->getContainer()->set(
             CompanyHistoryQuotesAdapterInterface::class,
-            new CompanyHistoryQuotesAdapterStub()
+            new CompanyHistoryQuotesAdapterSpy()
         );
     }
 
