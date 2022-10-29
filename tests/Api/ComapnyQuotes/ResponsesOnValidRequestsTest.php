@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Api;
+namespace App\Tests\Api\ComapnyQuotes;
 
-class MainFormResponsesOnValidRequestsTest extends AbstractMainFormTestCase
+class ResponsesOnValidRequestsTest extends AbstractTestCase
 {
     public function testReturnValidDataOnValidRequest(): void
     {
@@ -50,7 +50,7 @@ class MainFormResponsesOnValidRequestsTest extends AbstractMainFormTestCase
         ]);
 
         // WHEN
-        $client->request('POST', '/api/main-form', [
+        $client->request('POST', self::API_URL, [
             'companySymbol' => $companySymbol,
             'startDate' => '2001-01-11',
             'endDate' => '2001-02-03',

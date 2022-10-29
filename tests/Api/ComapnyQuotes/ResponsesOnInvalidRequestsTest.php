@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Api;
+namespace App\Tests\Api\ComapnyQuotes;
 
-class MainFormResponsesOnInvalidRequestsTest extends AbstractMainFormTestCase
+class ResponsesOnInvalidRequestsTest extends AbstractTestCase
 {
     public function testReturnErrorWhenFieldsNotPosted(): void
     {
@@ -11,7 +11,7 @@ class MainFormResponsesOnInvalidRequestsTest extends AbstractMainFormTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', '/api/main-form');
+        $client->request('POST', self::API_URL);
 
         // THEN
         $response = $client->getResponse();
@@ -38,7 +38,7 @@ class MainFormResponsesOnInvalidRequestsTest extends AbstractMainFormTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', '/api/main-form', [
+        $client->request('POST', self::API_URL, [
             'companySymbol' => 'AAIT',
             'startDate' => 'b',
             'endDate' => 'c',
@@ -70,7 +70,7 @@ class MainFormResponsesOnInvalidRequestsTest extends AbstractMainFormTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', '/api/main-form', [
+        $client->request('POST', self::API_URL, [
             'companySymbol' => 'AAIT',
             'startDate' => '2001-02-04',
             'endDate' => '2001-02-03',
@@ -101,7 +101,7 @@ class MainFormResponsesOnInvalidRequestsTest extends AbstractMainFormTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', '/api/main-form', [
+        $client->request('POST', self::API_URL, [
             'companySymbol' => 'AAIT',
             'startDate' => '2001-02-03',
             'endDate' => '2001-02-03',
@@ -132,7 +132,7 @@ class MainFormResponsesOnInvalidRequestsTest extends AbstractMainFormTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', '/api/main-form', [
+        $client->request('POST', self::API_URL, [
             'companySymbol' => 'ABCD',
             'startDate' => '2001-02-03',
             'endDate' => '2001-02-03',

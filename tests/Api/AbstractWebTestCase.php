@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractWebTestCase extends WebTestCase
 {
-
     protected function assertResponseJsonContent(array $expectedJson, Response $response): void
     {
         $this->assertJsonStringEqualsJsonString(

@@ -2,8 +2,8 @@
 
 namespace App\Controller\Api;
 
-use App\Form\MainFormType;
-use App\Form\MainFormTypeHandler;
+use App\Form\CompanyQuotesFatcherType;
+use App\Form\CompanyQuotesFetcherTypeHandler;
 use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface;
 use App\Service\CompanyFinderBySymbolServiceInterface;
 use App\Service\QuotesRetrievalServiceInterface;
@@ -12,19 +12,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MainFormController extends AbstractController
+class CompanyQuotesController extends AbstractController
 {
     public function __construct(
         protected CompanyFinderBySymbolServiceInterface $companyService,
         protected QuotesRetrievalServiceInterface $quotesService,
         protected QuotesRetrievalNotifierInterface $notifier,
-        protected MainFormTypeHandler $formHandler
+        protected CompanyQuotesFetcherTypeHandler $formHandler
     ){}
 
-    #[Route('/api/main-form', name: 'api_main_form', methods: ['POST'])]
+    #[Route('/api/company-quotes', name: 'api_company_quotes', methods: ['POST'])]
     public function submit(Request $request): Response
     {
-        $form = $this->createForm(MainFormType::class);
+        $form = $this->createForm(CompanyQuotesFatcherType::class);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {

@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Tests\Api;
+namespace App\Tests\Api\ComapnyQuotes;
 
 use App\Gateway\CompanyList\CompanyListAdapterInterface;
 use App\Gateway\Quotes\CompanyHistoryQuotesAdapterInterface;
+use App\Tests\Api\AbstractWebTestCase;
 use App\Tests\Gateway\CompanyList\CompanyListAdapterStub;
 use App\Tests\Gateway\Quotes\CompanyHistoryQuotesAdapterSpy;
 
-abstract class AbstractMainFormTestCase extends AbstractWebTestCase
+abstract class AbstractTestCase extends AbstractWebTestCase
 {
+    protected const API_URL = '/api/company-quotes';
+
     private function mockCompanyListAdapter(): void
     {
         $this->getContainer()->set(

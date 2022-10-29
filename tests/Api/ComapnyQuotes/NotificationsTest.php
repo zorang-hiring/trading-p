@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Api;
+namespace App\Tests\Api\ComapnyQuotes;
 
 use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotificationDto;
 use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 
-class MainFormNotificationsTest extends AbstractMainFormTestCase
+class NotificationsTest extends AbstractTestCase
 {
     use MailerAssertionsTrait;
 
@@ -17,7 +17,7 @@ class MainFormNotificationsTest extends AbstractMainFormTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', '/api/main-form', [
+        $client->request('POST', self::API_URL, [
             'companySymbol' => 'AAIT',
             'startDate' => '2001-02-04',
             'endDate' => '2001-02-03',
@@ -39,7 +39,7 @@ class MainFormNotificationsTest extends AbstractMainFormTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', '/api/main-form', [
+        $client->request('POST', self::API_URL, [
             'companySymbol' => $companySymbol,
             'startDate' => '2001-01-11',
             'endDate' => '2001-02-03',

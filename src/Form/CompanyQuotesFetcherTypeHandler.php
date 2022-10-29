@@ -8,7 +8,7 @@ use App\Gateway\DataRetrievalNotifier\QuotesRetrievalNotifierInterface;
 use App\Service\CompanyFinderBySymbolServiceInterface;
 use App\Service\QuotesRetrievalServiceInterface;
 
-class MainFormTypeHandler
+class CompanyQuotesFetcherTypeHandler
 {
     public function __construct(
         protected CompanyFinderBySymbolServiceInterface $companyService,
@@ -16,7 +16,7 @@ class MainFormTypeHandler
         protected QuotesRetrievalNotifierInterface $notifier
     ){}
 
-    public function handle(MainFormTypeDto $formData): array
+    public function handle(CompanyQuotesFetcherTypeDto $formData): array
     {
         $company = $this->getCompany($formData->companySymbol);
 
@@ -31,7 +31,7 @@ class MainFormTypeHandler
         return $result;
     }
 
-    private function sendNotification(MainFormTypeDto $formData, Company $company): void
+    private function sendNotification(CompanyQuotesFetcherTypeDto $formData, Company $company): void
     {
         $notification = new QuotesRetrievalNotificationDto();
         $notification->forCompanyName = $company->name;

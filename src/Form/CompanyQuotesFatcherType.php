@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 
-class MainFormType extends AbstractType
+class CompanyQuotesFatcherType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -75,7 +75,7 @@ class MainFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => MainFormTypeDto::class,
+            'data_class' => CompanyQuotesFetcherTypeDto::class,
             'allow_extra_fields' => true
         ]);
     }
