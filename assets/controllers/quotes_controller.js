@@ -29,7 +29,7 @@ export default class extends Controller {
         this.email_errorTarget.textContent = '';
     }
 
-    fetch() {
+    async fetch() {
 
         // todo prevent flooding
 
@@ -42,8 +42,11 @@ export default class extends Controller {
         input.endDate = this.end_dateTarget.value;
         input.email = this.emailTarget.value;
 
-        let service = new QuotesFacade()
-        let output = service.fetch(input)
+        let handler = new QuotesFacade()
+
+        // block button
+        let output = await handler.fetch(input)
+        // unblock button
 
         if (output.status === 'NOK') {
             // show errors

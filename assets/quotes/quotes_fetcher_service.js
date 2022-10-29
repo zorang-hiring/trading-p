@@ -7,18 +7,18 @@ export class QuoteFetcherService {
      * @returns {Promise<unknown>} QuotesPresenterOutput
      */
     async fetch(input) {
-        return new Promise((resolve, reject) => {
-            const response = getCompanyQuotesFromApi(input)
-            response.then(function (response) {
-                resolve(buildPresenterOutput(response.data));
-            }).catch(function (error) {
-                if (!error.response || error.response.status !== 400 || !error.response.data) {
-                    console.warn('Unexpected exception triggered')
-                    throw error
-                }
-                reject(buildPresenterOutput(error.response.data));
-            })
-        });
+        try {
+            const response = await getCompanyQuotesFromApi(input)
+            console.log('fetcher service success', response);
+            return buildPresenterOutput(response.data);
+        } catch (error) {
+            console.log('fetcher service error', error);
+            if (!error.response || error.response.status !== 400 || !error.response.data) {
+                console.warn('Unexpected exception triggered')
+                throw error
+            }
+            return buildPresenterOutput(error.response.data)
+        }
     }
 }
 
