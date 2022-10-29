@@ -40,17 +40,13 @@ export default class QuotesController extends Controller {
         button.textContent = 'Submit'
     }
 
+    /**
+     * Main method to submit the form
+     */
     async fetch() {
 
-        // todo prevent flooding
-
-        // build input
-        let input = buildInput.call(this);
-
-        let handler = new QuotesFacade()
-
         this.disableForm()
-        let output = await handler.fetch(input)
+        let output = await (new QuotesFacade()).fetch(buildInput.call(this))
         this.enableForm()
 
         if (output.isNotOk()) {
