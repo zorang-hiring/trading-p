@@ -26,7 +26,7 @@ just run command twice or more.
 
 ## Usage:
 
-Open page: `http:todo`
+Open page: `http://127.0.0.1:8080`
 And enjoy.
 
 ## Tests!
