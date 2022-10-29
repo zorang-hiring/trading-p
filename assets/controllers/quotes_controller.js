@@ -12,7 +12,10 @@ import {QuotesFacade} from "../quotes/quotes_facade.js";
  * Delete this file or adapt it for your use!
  */
 export default class extends Controller {
-    static targets = [ "company_symbol", "start_date", "end_date", "email", "tmp_output" ]
+    static targets = [
+        "company_symbol", "start_date", "end_date", "email", "tmp_output",
+        "company_symbol_error", "start_date_error", "end_date_error", "email_error"
+    ]
 
     // connect() {
     //     this.element.textContent = 'Hello Stimulus!3';
