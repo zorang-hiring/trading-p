@@ -1,4 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
+import {QuotesPresenterInput} from "../quotes/quotes_presenter_input.js";
+import {QuotesFacade} from "../quotes/quotes_facade.js";
 
 /*
  * This is an example Stimulus controller!
@@ -23,6 +25,23 @@ export default class extends Controller {
         // BUSINESS LOGIC
 
         // pass input
+        let input = new QuotesPresenterInput();
+        input.companySymbol = this.company_symbolTarget.value;
+        input.startDate = this.start_dateTarget.value;
+        input.endDate = this.end_dateTarget.value;
+        input.email = this.emailTarget.value;
+
+        let service = new QuotesFacade()
+        let output = service.fetch(input)
+
+        if (output.status === 'NOK') {
+            // show errors
+            this.company_symbol_errorTarget.textContent = output.errors.companySymbol;
+            this.start_date_errorTarget.textContent = output.errors.startDate;
+            this.end_date_errorTarget.textContent = output.errors.endDate;
+            this.email_errorTarget.textContent = output.errors.email;
+            return;
+        }
 
         // validate
             // validate FE
