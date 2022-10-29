@@ -21,5 +21,9 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress",
         "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
+    },
+    "dependencies": {
+        "moment": "^2.29.4",
+        "validate.js": "^0.13.1"
     }
 }
