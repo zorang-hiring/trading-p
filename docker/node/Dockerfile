@@ -1,16 +1,11 @@
-FROM node:18-alpine
+FROM ppiper/node-browsers:v22-16-buster
 
-# required with manipilating with some php composer packages
-#RUN apt-get -y update
-#RUN apt-get -y install git
+ENV CHROME_BIN=/usr/bin/google-chrome
+#ENV CHROME_BIN=/usr/bin/chromium
 
-# required for JS files if exists
-#RUN apt-get -y update
-#RUN apt-get -y install npm
-RUN apk update && apk add bash
-
+USER root
 ADD start.sh /
-RUN chmod +x /start.sh
+RUN chmod 755 /start.sh
+# return back to old user (this is different from image to image, verify when change docker image)
+USER node
 ENTRYPOINT ["/start.sh"]
-
-#EXPOSE 8888

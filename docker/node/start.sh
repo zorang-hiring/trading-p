@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install npm dependencies
-cd var/www/current
+cd /var/www/current
 npm install
 
 # build frontend

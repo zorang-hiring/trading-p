@@ -57,7 +57,7 @@ services:
       - ${WAIT_FOR_IT_PATH}:/usr/local/bin/wait-for-it.sh
     depends_on:
       - node
-    command: [ "wait-for-it.sh", "${PHP_FPM_ALIAS}:9000", "-s", "-t", "120", "--", "nginx" ]
+    command: [ "wait-for-it.sh", "${PHP_FPM_ALIAS}:9000", "-s", "-t", "180", "--", "nginx" ]
     ports:
       - "${NGINX_API_HOST_HTTP_PORT}:81"
       - "${NGINX_UI_HOST_HTTP_PORT}:80"

@@ -21,8 +21,8 @@ to debug (todo remove):
 ```
 DOCKER_BUILDKIT=0 docker-compose -f docker/docker-compose.yml --env-file docker/sample.env up --build
 ```
-Note: if you get timeout message because of some reason (e.g. slow local computer or internet connection) 
-just run command twice or more.
+Note: Build is massive, so if you get timeout message because of some reason 
+(e.g. slow local computer or internet connection) just run command twice or more.
 
 ## Usage:
 
@@ -31,19 +31,13 @@ And enjoy.
 
 ## Tests!
 
-### Backend Tests
+### Tests
 
 **Coverage is total - 100.00%!**
 
-Run Backend tests with coverage:
+Run tests with coverage:
 ```
 docker exec --workdir /var/www/current docker-php-fpm-1 php bin/phpunit --coverage-text
-```
-
-### Frontend Tests
-
-```
-docker exec --workdir /var/www/current docker-node-1 npm test
 ```
 
 ## Dev Frontend
