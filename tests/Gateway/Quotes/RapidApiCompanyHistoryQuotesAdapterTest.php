@@ -112,7 +112,7 @@ class RapidApiCompanyHistoryQuotesAdapterTest extends AbstractGatewayTestCase
 
     public function testGetClient()
     {
-        $wrapper = new class extends RapidApiCompanyHistoryQuotesAdapter {
+        $wrapper = new class ('a', 'b') extends RapidApiCompanyHistoryQuotesAdapter {
             public function getProtectedClient(): Client { return $this->getClient(); }
         };
         self::assertInstanceOf(Client::class, $wrapper->getProtectedClient());

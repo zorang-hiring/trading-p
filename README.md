@@ -31,7 +31,7 @@ And enjoy.
 
 ## Tests!
 
-**Coverage is ~total - 99.15%!** (todo)
+**Coverage is total - 100.00%!**
 
 Run Backend tests with coverage:
 ```
