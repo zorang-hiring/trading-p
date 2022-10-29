@@ -1,6 +1,9 @@
 import { Controller } from '@hotwired/stimulus';
 import {QuotesPresenterInput} from "../quotes/quotes_presenter_input.js";
 import {QuotesFacade} from "../quotes/quotes_facade.js";
+import {ChartGenerator} from "../quotes/quotes_clart";
+import {Chart} from "chart.js";
+import $ from "jquery";
 
 export default class QuotesController extends Controller {
     static targets = [
@@ -13,32 +16,14 @@ export default class QuotesController extends Controller {
         "end_date_error",
         "email_error",
         "submit",
-        "tableBody"
+        "tableBody",
+        "chart"
     ]
 
-    clearFormValidationErrors()
-    {
-        this.company_symbol_errorTarget.textContent = '';
-        this.start_date_errorTarget.textContent = '';
-        this.end_date_errorTarget.textContent = '';
-        this.email_errorTarget.textContent = '';
-    }
-
-    getSubmitButton() {
-        return this.submitTarget;
-    }
-
-    disableForm() {
-        let button = this.getSubmitButton();
-        button.disabled = "disabled"
-        button.textContent = 'Please Wait ...'
-    }
-
-    enableForm() {
-        let button = this.getSubmitButton();
-        button.disabled = false
-        button.textContent = 'Submit'
-    }
+    /**
+     * @type {Chart}
+     */
+    chart = undefined;
 
     /**
      * Main method to submit the form
@@ -63,6 +48,34 @@ export default class QuotesController extends Controller {
         }
 
         fillData.call(this, output)
+    }
+
+    clearFormValidationErrors()
+    {
+        this.company_symbol_errorTarget.textContent = '';
+        this.start_date_errorTarget.textContent = '';
+        this.end_date_errorTarget.textContent = '';
+        this.email_errorTarget.textContent = '';
+    }
+
+    getSubmitButton() {
+        return this.submitTarget;
+    }
+
+    getChartElement() {
+        return this.chartTarget;
+    }
+
+    disableForm() {
+        let button = this.getSubmitButton();
+        button.disabled = "disabled"
+        button.textContent = 'Please Wait ...'
+    }
+
+    enableForm() {
+        let button = this.getSubmitButton();
+        button.disabled = false
+        button.textContent = 'Submit'
     }
 }
 
@@ -92,8 +105,18 @@ function showValidationErrors(output) {
  * @param {QuotesPresenterOutput} output
  */
 function fillData(output) {
+    fillChart.call(this, output)
     fillTableData.call(this, output);
-    // build chart
+}
+
+/**
+ * @param {QuotesPresenterOutput} output
+ */
+function fillChart(output) {
+    if (this.chart) {
+        this.chart.destroy()
+    }
+    this.chart = (new ChartGenerator()).generate(this.getChartElement(), output);
 }
 
 /**
