@@ -47,3 +47,4 @@ local computer then just update the command.
   docker-nginx-1    | wait-for-it.sh: strict mode, refusing to execute subprocess
   docker-nginx-1 exited with code 124
   Reason: composer install dependencies takes a lot of time, solution is to extend neginx wait timeout or to run docker build again
+- env variables env.dist, uputstvo itd.
