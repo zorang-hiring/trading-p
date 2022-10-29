@@ -1,0 +1,6 @@
+{
+    "verbose": true,
+    "rootDir": "./assets",
+    "moduleFileExtensions": ["js", "mjs"],
+    "testRegex": "test\\.js$"
+}

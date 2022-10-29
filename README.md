@@ -31,14 +31,20 @@ And enjoy.
 
 ## Tests!
 
+### Backend Tests
+
 **Coverage is total - 100.00%!**
 
 Run Backend tests with coverage:
 ```
 docker exec --workdir /var/www/current docker-php-fpm-1 php bin/phpunit --coverage-text
 ```
-Note: 'docker-php-fpm-1' should be your php docker container name. If you have different container name on your
-local computer then just update the command.
+
+### Frontend Tests
+
+```
+docker exec --workdir /var/www/current docker-node-1 npm test
+```
 
 ## Dev Frontend
 
