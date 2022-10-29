@@ -44,14 +44,8 @@ export default class QuotesController extends Controller {
 
         // todo prevent flooding
 
-        // BUSINESS LOGIC
-
         // build input
-        let input = new QuotesPresenterInput();
-        input.companySymbol = this.company_symbolTarget.value;
-        input.startDate = this.start_dateTarget.value;
-        input.endDate = this.end_dateTarget.value;
-        input.email = this.emailTarget.value;
+        let input = buildInput.call(this);
 
         let handler = new QuotesFacade()
 
@@ -59,7 +53,7 @@ export default class QuotesController extends Controller {
         let output = await handler.fetch(input)
         this.enableForm()
 
-        if (output.status !== 'OK') {
+        if (output.isNotOk()) {
             showValidationErrors.call(this, output);
             showNoData.call(this)
             return;
@@ -73,15 +67,19 @@ export default class QuotesController extends Controller {
         }
 
         fillData.call(this, output)
-
-        // if not valid
-            // show errors
-        // else
-            // continue
-
-        // draw table
-        // draw chart
     }
+}
+
+/**
+ * @returns {QuotesPresenterInput}
+ */
+function buildInput() {
+    let input = new QuotesPresenterInput();
+    input.companySymbol = this.company_symbolTarget.value;
+    input.startDate = this.start_dateTarget.value;
+    input.endDate = this.end_dateTarget.value;
+    input.email = this.emailTarget.value;
+    return input;
 }
 
 /**
@@ -97,6 +95,14 @@ function showValidationErrors(output) {
 /**
  * @param {QuotesPresenterOutput} output
  */
+function fillData(output) {
+    fillTableData.call(this, output);
+    // build chart
+}
+
+/**
+ * @param {QuotesPresenterOutput} output
+ */
 function fillTableData(output) {
     let tBodyHtml = '';
     output.data.forEach(item => {
@@ -106,25 +112,22 @@ function fillTableData(output) {
 }
 
 /**
- * @param {QuotesPresenterOutput} output
+ *
+ * @param {QuotePresenterOutputDataItem} item
+ * @returns {string}
  */
-function fillData(output) {
-    fillTableData.call(this, output);
-    // build chart
+function generateTableRowView(item)
+{
+    return '<tr>' +
+        '<td>' + item.dateFormatted() + '</td>' +
+        '<td>' + item.openFormatted() + '</td>' +
+        '<td>' + item.highFormatted() + '</td>' +
+        '<td>' + item.lowFormatted() + '</td>' +
+        '<td>' + item.closeFormatted() + '</td>' +
+        '<td>' + item.volumeFormatted() + '</td>' +
+        '</tr>';
 }
 
 function showNoData() {
     this.tableBodyTarget.innerHTML = '';
-}
-
-function generateTableRowView(rowData)
-{
-    return '<tr>' +
-        '<td>' + rowData.date + '</td>' +
-        '<td>' + rowData.open + '</td>' +
-        '<td>' + rowData.high + '</td>' +
-        '<td>' + rowData.low + '</td>' +
-        '<td>' + rowData.close + '</td>' +
-        '<td>' + rowData.volume + '</td>' +
-        '</tr>';
 }

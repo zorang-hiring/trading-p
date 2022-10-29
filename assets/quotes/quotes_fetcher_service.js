@@ -1,5 +1,5 @@
 import axios from "axios";
-import {QuotesPresenterOutput} from "./quotes_presenter_output";
+import {QuotesPresenterOutput, QuotePresenterOutputDataItem} from "./quotes_presenter_output";
 
 export class QuoteFetcherService {
     /**
@@ -27,7 +27,20 @@ function buildPresenterOutput(responseData) {
     result.status = responseData.status
     result.message = responseData.message
     result.errors = responseData.errors
-    result.data = responseData.data
+
+    let dataArray = []
+    responseData.data.forEach(item => {
+        let data = new QuotePresenterOutputDataItem()
+        data.date = item.date;
+        data.open = item.open;
+        data.high = item.high;
+        data.low = item.low;
+        data.close = item.close;
+        data.volume = item.volume;
+        dataArray.push(data)
+    })
+
+    result.data = dataArray
     return result;
 }
 
