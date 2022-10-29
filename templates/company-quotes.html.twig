@@ -14,6 +14,12 @@
         {% endblock %}
     </head>
     <body>
-        123
+        <div data-controller="quotes">
+{#            <input data-quotes-target="name" type="text">#}
+{#            <button data-action="click->quotes#greet">Greet</button>#}
+
+            <span data-quotes-target="output">
+            </span>
+        </div>
     </body>
 </html>

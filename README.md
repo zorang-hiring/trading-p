@@ -40,6 +40,18 @@ docker exec --workdir /var/www/current docker-php-fpm-1 php bin/phpunit --covera
 Note: 'docker-php-fpm-1' should be your php docker container name. If you have different container name on your
 local computer then just update the command.
 
+## Dev Frontend
+
+To compile files
+```
+docker exec --workdir /var/www/current docker-node-1 npm run dev
+```
+
+To watch files
+```
+docker exec --workdir /var/www/current docker-node-1 npm run watch
+```
+
 ## TODO
 
 - Docker build issue
