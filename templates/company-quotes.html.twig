@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Company Quotes{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -18,8 +18,42 @@
 {#            <input data-quotes-target="name" type="text">#}
 {#            <button data-action="click->quotes#greet">Greet</button>#}
 
-            <span data-quotes-target="output">
-            </span>
+            <div id="form-wrapper">
+                <form id="form" action="#" method="post">
+                    <div>
+                        <label for="name">Company Symbol:</label>
+                        <input type="text" data-quotes-target="company_symbol" id="company_symbol" value="" tabindex="1">
+                    </div>
+                    <div>
+                        <label for="name">Start Date:</label>
+                        <input type="text" data-quotes-target="start_date" id="start_date" value="" tabindex="2">
+                    </div>
+                    <div>
+                        <label for="name">End Date:</label>
+                        <input type="text" data-quotes-target="end_date" id="end_date" value="" tabindex="3">
+                    </div>
+                    <div>
+                        <label for="name">Email:</label>
+                        <input type="text" data-quotes-target="email" id="email" value="" tabindex="4">
+                    </div>
+                    <div>
+                        <button type="button" data-action="click->quotes#fetch">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="quotes-data">
+                <div id="table">
+                </div>
+                <div id="chart">
+                </div>
+            </div>
+
+{#          TODO remove#}
+            <div data-quotes-target="tmp_output"></div>
+
+{#            <span data-quotes-target="output">#}
+{#            </span>#}
         </div>
     </body>
 </html>
