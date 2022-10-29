@@ -14,6 +14,10 @@ export const quotesInputConstrains = {
         datetime: {
             dateOnly: true,
             message: "accepted date format is YYYY-MM-DD."
+        },
+        lessOrEqualThanDate: {
+            compareToField: "endDate",
+            message: 'has to be less or equal then end date'
         }
     },
     endDate: {
@@ -23,6 +27,10 @@ export const quotesInputConstrains = {
         datetime: {
             dateOnly: true,
             message: "accepted date format is YYYY-MM-DD."
+        },
+        greaterOrEqualThanDate: {
+            compareToField: "startDate",
+            message: 'has to be greater or equal then start date'
         }
     },
     email: {
@@ -34,6 +42,28 @@ export const quotesInputConstrains = {
         }
     }
 }
+
+validate.validators.lessOrEqualThanDate = function(value, options, key, attributes) {
+    value = moment(value, 'YYYY-MM-DD', true)
+    const compareTo = moment(attributes[options.compareToField], 'YYYY-MM-DD', true)
+    if (!value.isValid() || !compareTo.isValid()) {
+        return;
+    }
+    if (parseInt(value.format("YYYYMMDD")) > parseInt(compareTo.format("YYYYMMDD"))) {
+        return options.message || 'has to be less or equal then ' + options.compareToField;
+    }
+};
+
+validate.validators.greaterOrEqualThanDate = function(value, options, key, attributes) {
+    value = moment(value, 'YYYY-MM-DD', true)
+    const compareTo = moment(attributes[options.compareToField], 'YYYY-MM-DD', true)
+    if (!value.isValid() || !compareTo.isValid()) {
+        return;
+    }
+    if (parseInt(value.format("YYYYMMDD")) < parseInt(compareTo.format("YYYYMMDD"))) {
+        return options.message || 'has to be greater or equal then ' + options.compareToField;
+    }
+};
 
 validate.extend(validate.validators.datetime, {
     // The value is guaranteed not to be null or undefined but otherwise it

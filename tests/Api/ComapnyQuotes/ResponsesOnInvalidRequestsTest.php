@@ -11,7 +11,7 @@ class ResponsesOnInvalidRequestsTest extends AbstractTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', self::API_URL);
+        $this->sendGetQuotesRequest($client, []);
 
         // THEN
         $response = $client->getResponse();
@@ -38,7 +38,7 @@ class ResponsesOnInvalidRequestsTest extends AbstractTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', self::API_URL, [
+        $this->sendGetQuotesRequest($client, [
             'companySymbol' => 'AAIT',
             'startDate' => 'b',
             'endDate' => 'c',
@@ -70,7 +70,7 @@ class ResponsesOnInvalidRequestsTest extends AbstractTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', self::API_URL, [
+        $this->sendGetQuotesRequest($client, [
             'companySymbol' => 'AAIT',
             'startDate' => '2001-02-04',
             'endDate' => '2001-02-03',
@@ -101,7 +101,7 @@ class ResponsesOnInvalidRequestsTest extends AbstractTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', self::API_URL, [
+        $this->sendGetQuotesRequest($client, [
             'companySymbol' => 'AAIT',
             'startDate' => '2001-02-03',
             'endDate' => '2001-02-03',
@@ -132,7 +132,7 @@ class ResponsesOnInvalidRequestsTest extends AbstractTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', self::API_URL, [
+        $this->sendGetQuotesRequest($client, [
             'companySymbol' => 'ABCD',
             'startDate' => '2001-02-03',
             'endDate' => '2001-02-03',

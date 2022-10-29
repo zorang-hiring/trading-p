@@ -17,7 +17,7 @@ class NotificationsTest extends AbstractTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', self::API_URL, [
+        $this->sendGetQuotesRequest($client, [
             'companySymbol' => 'AAIT',
             'startDate' => '2001-02-04',
             'endDate' => '2001-02-03',
@@ -39,7 +39,7 @@ class NotificationsTest extends AbstractTestCase
         $this->mockAdapters();
 
         // WHEN
-        $client->request('POST', self::API_URL, [
+        $this->sendGetQuotesRequest($client, [
             'companySymbol' => $companySymbol,
             'startDate' => '2001-01-11',
             'endDate' => '2001-02-03',
