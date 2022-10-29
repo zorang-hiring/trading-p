@@ -21,6 +21,14 @@ export default class extends Controller {
     //     this.element.textContent = 'Hello Stimulus!3';
     // }
 
+    clearFormValidationErrors()
+    {
+        this.company_symbol_errorTarget.textContent = '';
+        this.start_date_errorTarget.textContent = '';
+        this.end_date_errorTarget.textContent = '';
+        this.email_errorTarget.textContent = '';
+    }
+
     fetch() {
 
         // todo prevent flooding
@@ -46,12 +54,9 @@ export default class extends Controller {
             return;
         }
 
-        // validate
-            // validate FE
-               // if valid
-                   // request BE
-               // else
-                   // continue
+        this.clearFormValidationErrors()
+
+
 
         // PRESENTATION LOGIC
 
@@ -62,8 +67,5 @@ export default class extends Controller {
 
         // draw table
         // draw chart
-
-        this.tmp_outputTarget.textContent =
-            `${this.company_symbolTarget.value} ${this.start_dateTarget.value} ${this.end_dateTarget.value} ${this.emailTarget.value}`
     }
 }

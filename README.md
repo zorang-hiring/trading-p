@@ -60,3 +60,4 @@ docker exec --workdir /var/www/current docker-node-1 npm run watch
   docker-nginx-1 exited with code 124
   Reason: composer install dependencies takes a lot of time, solution is to extend neginx wait timeout or to run docker build again
 - env variables env.dist, uputstvo itd.
+- typing in field clear validation error
