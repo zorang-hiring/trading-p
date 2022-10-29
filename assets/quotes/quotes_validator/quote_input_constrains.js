@@ -11,10 +11,7 @@ export const quotesInputConstrains = {
         presence: {
             allowEmpty: false
         },
-        datetime: {
-            dateOnly: true,
-            message: "accepted date format is YYYY-MM-DD."
-        },
+        validDate: true,
         lessOrEqualThanDate: {
             compareToField: "endDate",
             message: 'has to be less or equal then end date'
@@ -24,10 +21,7 @@ export const quotesInputConstrains = {
         presence: {
             allowEmpty: false
         },
-        datetime: {
-            dateOnly: true,
-            message: "accepted date format is YYYY-MM-DD."
-        },
+        validDate: true,
         greaterOrEqualThanDate: {
             compareToField: "startDate",
             message: 'has to be greater or equal then start date'
@@ -42,6 +36,13 @@ export const quotesInputConstrains = {
         }
     }
 }
+
+validate.validators.validDate = function(value, options) {
+    value = moment(value, 'YYYY-MM-DD', true)
+    if (!value.isValid()) {
+        return options.message || 'accepted date format is YYYY-MM-DD';
+    }
+};
 
 validate.validators.lessOrEqualThanDate = function(value, options, key, attributes) {
     value = moment(value, 'YYYY-MM-DD', true)
