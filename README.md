@@ -6,7 +6,7 @@ Application is developed using Dicker, PHP, Symfony, Javascript.
 It's composed of 2 parts: API (Backend) and small SPA which operates dynamically without Web page refreshing.
 
 Most important App Folders:
-- `./tests` (Contains API BE with has 100% coverage)
+- `./tests` (contains API BE tests with 100% coverage)
 - `./src` Backed code (PHP)
 - `./assets` source code of Frontend Business Logic (Single Page Application)
 - `./docker` Docker code
