@@ -7,6 +7,7 @@ use App\Gateway\Quotes\CompanyHistoryQuotesAdapterInterface;
 use App\Tests\Api\AbstractWebTestCase;
 use App\Tests\Gateway\CompanyList\CompanyListAdapterStub;
 use App\Tests\Gateway\Quotes\CompanyHistoryQuotesAdapterSpy;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 abstract class AbstractTestCase extends AbstractWebTestCase
 {
@@ -47,5 +48,10 @@ abstract class AbstractTestCase extends AbstractWebTestCase
             CompanyHistoryQuotesAdapterInterface::class,
         );
         return $adapter;
+    }
+
+    protected function sendGetQuotesRequest(KernelBrowser $client, array $data)
+    {
+        $client->request('GET', self::API_URL, $data);
     }
 }

@@ -21,11 +21,11 @@ class CompanyQuotesController extends AbstractController
         protected CompanyQuotesFetcherTypeHandler $formHandler
     ){}
 
-    #[Route('/api/company-quotes', name: 'api_company_quotes', methods: ['POST'])]
-    public function submit(Request $request): Response
+    #[Route('/api/company-quotes', name: 'api_company_quotes', methods: ['GET'])]
+    public function fetch(Request $request): Response
     {
         $form = $this->createForm(CompanyQuotesFatcherType::class);
-        $form->submit($request->request->all());
+        $form->submit($request->query->all());
 
         if (!$form->isValid()) {
             return $this->buildResponseJsonInvalidForm($form);
