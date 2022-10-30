@@ -1,5 +1,7 @@
-body {
-    background-color: lightgray;
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+.selector-for-some-widget {
+    box-sizing: content-box;
 }
 
 .style-error {

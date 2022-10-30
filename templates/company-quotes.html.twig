@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Company Quotes{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -14,32 +15,50 @@
         {% endblock %}
     </head>
     <body>
-        <div data-controller="quotes">
+    <div class="container">
+        <h2>Company Quotes</h2>
 
+        <div data-controller="quotes">
             <div id="form-wrapper">
                 <form id="form" action="#" method="post">
-                    <div>
-                        <label for="name">Company Symbol:</label>
-                        <input type="text" data-quotes-target="company_symbol" id="company_symbol" value="AAL" tabindex="1">
-                        <p class="style-error" data-quotes-target="company_symbol_error"></p>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="company_symbol" class="form-label">Company Symbol:</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control" data-quotes-target="company_symbol" id="company_symbol" value="AAL" tabindex="1">
+                            <p class="style-error form-text" data-quotes-target="company_symbol_error"></p>
+                        </div>
                     </div>
-                    <div>
-                        <label for="name">Start Date:</label>
-                        <input type="text" data-quotes-target="start_date" id="start_date" value="2022-09-01" tabindex="2">
-                        <p class="style-error" data-quotes-target="start_date_error"></p>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="start_date" class="form-label">Start Date:</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control" data-quotes-target="start_date" id="start_date" value="2022-09-01" tabindex="2">
+                            <p class="style-error form-text" data-quotes-target="start_date_error"></p>
+                        </div>
+                        <div class="col-auto">
+                            <label for="end_date" class="form-label">End Date:</label>
+                        </div>
+                        <div class="col-auto">
+                             <input type="text" class="form-control" data-quotes-target="end_date" id="end_date" value="2022-10-01" tabindex="3">
+                            <p class="style-error form-text" data-quotes-target="end_date_error"></p>
+                        </div>
                     </div>
-                    <div>
-                        <label for="name">End Date:</label>
-                        <input type="text" data-quotes-target="end_date" id="end_date" value="2022-10-01" tabindex="3">
-                        <p class="style-error" data-quotes-target="end_date_error"></p>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                             <label for="email" class="form-label">Email:</label>
+                        </div>
+                        <div class="col-auto">
+                             <input type="text" class="form-control" data-quotes-target="email" id="email" value="sine@aaa.com" tabindex="4">
+                            <p class="style-error form-text" data-quotes-target="email_error"></p>
+                        </div>
                     </div>
-                    <div>
-                        <label for="name">Email:</label>
-                        <input type="text" data-quotes-target="email" id="email" value="sine@aaa.com" tabindex="4">
-                        <p class="style-error" data-quotes-target="email_error"></p>
-                    </div>
-                    <div>
-                        <button type="button" data-quotes-target="submit" data-action="click->quotes#fetch" tabindex="5">Submit</button>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" data-quotes-target="submit" data-action="click->quotes#fetch" tabindex="5">Show</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -61,5 +80,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </body>
 </html>

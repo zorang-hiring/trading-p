@@ -87,7 +87,7 @@ export default class QuotesController extends Controller {
     enableForm() {
         let button = this.getSubmitButton();
         button.disabled = false
-        button.textContent = 'Submit'
+        button.textContent = 'Show'
     }
 }
 
