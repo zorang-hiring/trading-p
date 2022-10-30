@@ -149,7 +149,7 @@ function fillTableData(output) {
  */
 function generateTableRowView(item)
 {
-    return '<tr>' +
+    return '<tr scope="row">' +
         '<td>' + item.dateFormatted() + '</td>' +
         '<td>' + item.openFormatted() + '</td>' +
         '<td>' + item.highFormatted() + '</td>' +

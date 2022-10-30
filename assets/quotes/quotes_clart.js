@@ -67,7 +67,7 @@ export class ChartGenerator {
 
     getDatasetNegative() {
         return {
-            label: 'Negative',
+            label: '-',
             data: [],
             backgroundColor: 'rgb(185,40,1)',
         };
@@ -75,7 +75,7 @@ export class ChartGenerator {
 
     getDatasetPositive() {
         return {
-            label: 'Positive',
+            label: '+',
             data: [],
             backgroundColor: 'rgb(40,185,0)',
         };

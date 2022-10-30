@@ -16,7 +16,8 @@
     </head>
     <body>
     <div class="container">
-        <h2>Company Quotes</h2>
+        <br>
+        <h2 class="text-center">Company Quotes</h2>
 
         <div data-controller="quotes">
             <div id="form-wrapper">
@@ -67,17 +68,24 @@
                 <div>
                     <canvas data-quotes-target="chart" width="800" height="400"></canvas>
                 </div>
+                <br><br>
                 <div id="table">
-                    <table>
-                        <thead>
+                    <table class="table table-striped table-hover table-sm">
+                        <thead class="table-light">
                             <tr>
-                                <th>Date</th> <th>Open</th> <th>High</th> <th>Low</th> <th>Close</th> <th>Volume</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Open</th>
+                                <th scope="col">High</th>
+                                <th scope="col">Low</th>
+                                <th scope="col">Close</th>
+                                <th scope="col">Volume</th>
                             </tr>
                         </thead>
-                        <tbody data-quotes-target="tableBody">
+                        <tbody data-quotes-target="tableBody" class="table-group-divider">
                         </tbody>
                     </table>
                 </div>
+                <br><br>
             </div>
         </div>
     </div>
