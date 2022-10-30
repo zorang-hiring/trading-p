@@ -60,7 +60,10 @@
                     </div>
                     <div class="row g-3 align-items-center">
                         <div class="offset-sm-2 col-auto">
-                            <button type="button" class="btn btn-primary" data-quotes-target="submit" data-action="click->quotes#fetch" tabindex="5">Show</button>
+                            <button type="button" class="btn btn-primary" data-quotes-target="submit" data-action="click->quotes#fetch" tabindex="5">
+                                <span class="spinner-grow spinner-grow-sm style-hidden" data-quotes-target="submitSpinner" role="status" aria-hidden="true"></span>
+                                <span class="sr-only" data-quotes-target="submitText">Get</span>
+                            </button>
                         </div>
                     </div>
                 </form>

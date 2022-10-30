@@ -18,6 +18,8 @@ export default class QuotesController extends Controller {
         "end_date_error",
         "email_error",
         "submit",
+        "submitSpinner",
+        "submitText",
         "data",
         "tableBody",
         "chart"
@@ -73,6 +75,14 @@ export default class QuotesController extends Controller {
         return this.submitTarget;
     }
 
+    getSubmitButtonSpinner() {
+        return this.submitSpinnerTarget;
+    }
+
+    getSubmitButtonText() {
+        return this.submitTextTarget;
+    }
+
     getChartDomElement() {
         return this.chartTarget;
     }
@@ -88,15 +98,15 @@ export default class QuotesController extends Controller {
     }
 
     disableForm() {
-        let button = this.getSubmitButton();
-        button.disabled = "disabled"
-        button.textContent = 'Please Wait ...'
+        this.getSubmitButton().disabled = "disabled"
+        this.getSubmitButtonSpinner().classList.remove(this.STYLE_CLASS_HIDE);
+        this.getSubmitButtonText().textContent = 'Loading...'
     }
 
     enableForm() {
-        let button = this.getSubmitButton();
-        button.disabled = false
-        button.textContent = 'Show'
+        this.getSubmitButton().disabled = false
+        this.getSubmitButtonSpinner().classList.add(this.STYLE_CLASS_HIDE);
+        this.getSubmitButtonText().textContent = 'Get'
     }
 }
 
