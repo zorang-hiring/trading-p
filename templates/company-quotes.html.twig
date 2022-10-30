@@ -27,7 +27,8 @@
                             <label for="company_symbol" class="col-form-label-sm">Company Symbol:</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control form-control-sm" data-quotes-target="company_symbol" id="company_symbol" value="AAL" tabindex="1">
+                            <input type="text" class="form-control form-control-sm"
+                                   data-quotes-target="company_symbol" id="company_symbol" value="" tabindex="1">
                         </div>
                         <p class="style-error form-text" data-quotes-target="company_symbol_error"></p>
                     </div>
@@ -36,7 +37,8 @@
                             <label for="start_date" class="col-form-label-sm">Start Date:</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control form-control-sm" data-quotes-target="start_date" id="start_date" value="2022-09-01" tabindex="2">
+                            <input type="text" class="form-control form-control-sm"
+                                   data-quotes-target="start_date" id="start_date" value="" tabindex="2">
                         </div>
                         <p class="style-error form-text" data-quotes-target="start_date_error"></p>
                     </div>
@@ -45,7 +47,8 @@
                             <label for="end_date" class="col-form-label-sm">End Date:</label>
                         </div>
                         <div class="col-auto">
-                             <input type="text" class="form-control form-control-sm" data-quotes-target="end_date" id="end_date" value="2022-10-01" tabindex="3">
+                             <input type="text" class="form-control form-control-sm"
+                                    data-quotes-target="end_date" id="end_date" value="" tabindex="3">
                         </div>
                         <p class="style-error form-text" data-quotes-target="end_date_error"></p>
                     </div>
@@ -54,14 +57,17 @@
                              <label for="email" class="col-form-label-sm">Email:</label>
                         </div>
                         <div class="col-auto">
-                             <input type="text" class="form-control form-control-sm" data-quotes-target="email" id="email" value="sine@aaa.com" tabindex="4">
+                             <input type="text" class="form-control form-control-sm"
+                                    data-quotes-target="email" id="email" value="" tabindex="4">
                         </div>
                         <p class="style-error form-text" data-quotes-target="email_error"></p>
                     </div>
                     <div class="row g-3 align-items-center">
                         <div class="offset-sm-2 col-auto">
-                            <button type="button" class="btn btn-primary" data-quotes-target="submit" data-action="click->quotes#fetch" tabindex="5">
-                                <span class="spinner-grow spinner-grow-sm style-hidden" data-quotes-target="submitSpinner" role="status" aria-hidden="true"></span>
+                            <button type="button" class="btn btn-primary" data-quotes-target="submit"
+                                    data-action="click->quotes#fetch" tabindex="5">
+                                <span class="spinner-grow spinner-grow-sm style-hidden"
+                                      data-quotes-target="submitSpinner" role="status" aria-hidden="true"></span>
                                 <span class="sr-only" data-quotes-target="submitText">Get</span>
                             </button>
                         </div>

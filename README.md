@@ -33,7 +33,9 @@ From `./.env.dist` create `./.env` (in project root folder). Configure Mailer va
 docker-compose -f docker/docker-compose.yml --env-file docker/sample.env up --build
 ```
 _Note: Build is massive, so if you get timeout message because of some reason 
-(e.g. slow local computer or internet connection) just run command twice or more._
+(e.g. slow local computer or internet connection) just run command twice or more.
+It might happen that nginx container will go down if build takes too much time. 
+Just run it again if it happens._
 
 ## Usage:
 
