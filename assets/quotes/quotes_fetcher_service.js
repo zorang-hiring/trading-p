@@ -28,6 +28,11 @@ function buildPresenterOutput(responseData) {
     result.message = responseData.message
     result.errors = responseData.errors
 
+    if (!responseData.data) {
+        result.data = []
+        return result;
+    }
+
     let dataArray = []
     responseData.data.forEach(item => {
         let data = new QuotePresenterOutputDataItem()

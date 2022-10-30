@@ -3,7 +3,9 @@ import {QuotesPresenterInput} from "../quotes/quotes_presenter_input.js";
 import {QuotesFacade} from "../quotes/quotes_facade.js";
 import {ChartGenerator} from "../quotes/quotes_clart";
 import {Chart} from "chart.js";
-import $ from "jquery";
+import 'jquery-ui-bundle';
+import 'jquery-ui-bundle/jquery-ui.css';
+import $ from 'jquery';
 
 export default class QuotesController extends Controller {
     static targets = [
@@ -24,6 +26,10 @@ export default class QuotesController extends Controller {
      * @type {Chart}
      */
     chart = undefined;
+
+    connect() {
+        this.initDateElements()
+    }
 
     /**
      * Main method to submit the form
@@ -64,6 +70,12 @@ export default class QuotesController extends Controller {
 
     getChartElement() {
         return this.chartTarget;
+    }
+
+    initDateElements() {
+        const options = {dateFormat: "yy-mm-dd", maxDate: 0};
+        $('#start_date').datepicker(options)
+        $('#end_date').datepicker(options)
     }
 
     disableForm() {
