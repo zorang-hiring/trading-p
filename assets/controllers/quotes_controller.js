@@ -114,10 +114,15 @@ function buildInput() {
  * @param {QuotesPresenterOutput} output
  */
 function showValidationErrors(output) {
-    this.company_symbol_errorTarget.textContent = output.errors.companySymbol;
-    this.start_date_errorTarget.textContent = output.errors.startDate;
-    this.end_date_errorTarget.textContent = output.errors.endDate;
-    this.email_errorTarget.textContent = output.errors.email;
+
+    const formatError = function (dataArray) {
+        return dataArray ? dataArray.join('. ') : ''
+    }
+
+    this.company_symbol_errorTarget.textContent = formatError(output.errors.companySymbol);
+    this.start_date_errorTarget.textContent = formatError(output.errors.startDate);
+    this.end_date_errorTarget.textContent = formatError(output.errors.endDate);
+    this.email_errorTarget.textContent = formatError(output.errors.email);
 }
 
 /**
