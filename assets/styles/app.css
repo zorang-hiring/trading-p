@@ -7,3 +7,7 @@
 .style-error {
     color: red;
 }
+
+.style-hidden {
+    display: none !important;
+}

@@ -18,9 +18,12 @@ export default class QuotesController extends Controller {
         "end_date_error",
         "email_error",
         "submit",
+        "data",
         "tableBody",
         "chart"
     ]
+
+    STYLE_CLASS_HIDE = 'style-hidden';
 
     /**
      * @type {Chart}
@@ -53,7 +56,7 @@ export default class QuotesController extends Controller {
             return;
         }
 
-        fillData.call(this, output)
+        fillDataAndShow.call(this, output)
     }
 
     clearFormValidationErrors()
@@ -68,8 +71,12 @@ export default class QuotesController extends Controller {
         return this.submitTarget;
     }
 
-    getChartElement() {
+    getChartDomElement() {
         return this.chartTarget;
+    }
+
+    getDataDomElement() {
+        return this.dataTarget;
     }
 
     initDateElements() {
@@ -116,7 +123,8 @@ function showValidationErrors(output) {
 /**
  * @param {QuotesPresenterOutput} output
  */
-function fillData(output) {
+function fillDataAndShow(output) {
+    this.getDataDomElement().classList.remove(this.STYLE_CLASS_HIDE)
     fillChart.call(this, output)
     fillTableData.call(this, output);
 }
@@ -128,7 +136,7 @@ function fillChart(output) {
     if (this.chart) {
         this.chart.destroy()
     }
-    this.chart = (new ChartGenerator()).generate(this.getChartElement(), output);
+    this.chart = (new ChartGenerator()).generate(this.getChartDomElement(), output);
 }
 
 /**
@@ -160,6 +168,7 @@ function generateTableRowView(item)
 }
 
 function showNoData() {
+    this.getDataDomElement().classList.add(this.STYLE_CLASS_HIDE)
     if (this.chart) {
         this.chart.destroy();
     }
