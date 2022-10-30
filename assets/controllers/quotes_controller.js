@@ -22,7 +22,8 @@ export default class QuotesController extends Controller {
         "submitText",
         "data",
         "tableBody",
-        "chart"
+        "chart",
+        "noDataNotification",
     ]
 
     STYLE_CLASS_HIDE = 'style-hidden';
@@ -42,6 +43,7 @@ export default class QuotesController extends Controller {
     async fetch() {
 
         this.clearFormValidationErrors()
+        hideNoDataNotification.call(this)
 
         this.disableForm()
         let output = await (new QuotesFacade()).fetch(buildInput.call(this))
@@ -89,6 +91,10 @@ export default class QuotesController extends Controller {
 
     getDataDomElement() {
         return this.dataTarget;
+    }
+
+    getNoDataNotificationDomElement() {
+        return this.noDataNotificationTarget;
     }
 
     initDateElements() {
@@ -141,6 +147,7 @@ function showValidationErrors(output) {
  * @param {QuotesPresenterOutput} output
  */
 function fillDataAndShow(output) {
+    hideNoDataNotification.call(this)
     this.getDataDomElement().classList.remove(this.STYLE_CLASS_HIDE)
     fillChart.call(this, output)
     fillTableData.call(this, output);
@@ -185,9 +192,19 @@ function generateTableRowView(item)
 }
 
 function showNoData() {
+    showNoDataNotification.call(this)
     this.getDataDomElement().classList.add(this.STYLE_CLASS_HIDE)
     if (this.chart) {
         this.chart.destroy();
     }
     this.tableBodyTarget.innerHTML = '';
+}
+
+function showNoDataNotification()
+{
+    this.getNoDataNotificationDomElement().classList.remove(this.STYLE_CLASS_HIDE)
+}
+function hideNoDataNotification()
+{
+    this.getNoDataNotificationDomElement().classList.add(this.STYLE_CLASS_HIDE)
 }

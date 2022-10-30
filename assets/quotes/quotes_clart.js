@@ -16,7 +16,9 @@ export class ChartGenerator {
         let yMin = undefined;
         let yMax = undefined;
 
-        presenterOutput.data.forEach(item => {
+        let outputData = presenterOutput.data.slice().reverse();
+
+        outputData.forEach(item => {
             labels.push(item.dateFormatted())
             const min = item.open < item.close ? item.open : item.close;
             const max = item.open >= item.close ? item.open : item.close;

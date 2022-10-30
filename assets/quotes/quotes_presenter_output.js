@@ -28,7 +28,7 @@ export class QuotePresenterOutputDataItem {
     close = undefined
     volume = undefined
     dateFormatted() {
-        return moment.unix(this.date).calendar()
+        return moment.unix(this.date).format('L')
     }
     openFormatted() {
         return this.open.toFixed(2).toLocaleString()
