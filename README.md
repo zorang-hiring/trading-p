@@ -1,5 +1,17 @@
 # trading-p
 
+## About
+
+Application is developed using Dicker, PHP, Symfony, Javascript. 
+It's composed of 2 parts: API (Backend) and small SPA which operates dynamically without Web page refreshing.
+
+Most important App Folders:
+- `./tests` (Contains API BE with has 100% coverage)
+- `./src` Backed code (PHP)
+- `./assets` source code of Frontend Business Logic (Single Page Application)
+- `./docker` Docker code
+- `./templates` HTML view file
+
 ## Requirements
 
 1. Docker
@@ -13,16 +25,15 @@
 git clone https://github.com/zorang-hiring/trading-p
 ```
 
-##### 2. Run Docker
+##### 2. Configure Env Variables
+From `./.env.dist` create `./.env` (in project root folder). Configure Mailer variables to be able to send emails.
+
+##### 3. Run Docker
 ```
 docker-compose -f docker/docker-compose.yml --env-file docker/sample.env up --build
 ```
-to debug (todo remove):
-```
-DOCKER_BUILDKIT=0 docker-compose -f docker/docker-compose.yml --env-file docker/sample.env up --build
-```
-Note: Build is massive, so if you get timeout message because of some reason 
-(e.g. slow local computer or internet connection) just run command twice or more.
+_Note: Build is massive, so if you get timeout message because of some reason 
+(e.g. slow local computer or internet connection) just run command twice or more._
 
 ## Usage:
 
@@ -31,14 +42,15 @@ And enjoy.
 
 ## Tests!
 
-### Tests
-
-**Coverage is total - 100.00%!**
+**Coverage is total - 100.00%! (Backend)**
 
 Run tests with coverage:
 ```
 docker exec --workdir /var/www/current docker-php-fpm-1 php bin/phpunit --coverage-text
 ```
+
+_Note: frontend tests (JavaScript) have not been done 
+because majority or the logic in on the backend._
 
 ## Dev Frontend
 
@@ -51,13 +63,3 @@ To watch files
 ```
 docker exec --workdir /var/www/current docker-node-1 npm run watch
 ```
-
-## TODO
-
-- Docker build issue
-  docker-nginx-1    | wait-for-it.sh: timeout occurred after waiting 60 seconds for php-fpm:9000
-  docker-nginx-1    | wait-for-it.sh: strict mode, refusing to execute subprocess
-  docker-nginx-1 exited with code 124
-  Reason: composer install dependencies takes a lot of time, solution is to extend neginx wait timeout or to run docker build again
-- env variables env.dist, uputstvo itd.
-- typing in field clear validation error
